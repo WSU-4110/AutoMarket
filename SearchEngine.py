@@ -104,7 +104,7 @@ class Part:
     
 def main():
     finalList = []
-    results = []
+    filterResults = []
     finalResults = []
     priceHigh = 0
     priceLow = 0
@@ -113,6 +113,7 @@ def main():
     brand = ""
     category = ""
     subcategory = ""
+    flagged = False
     car = Car("Volkswagen GTI", "2005 - 2009", "2.0L Turbocharged I4",
               "6-speed manual", "Front-wheel drive")
     search = input("Search for products: ")
@@ -129,40 +130,27 @@ def main():
     # Excludes results that do not meet the filter criteria
     for i in finalList:
         if ((not priceHigh == 0) and (not priceLow == 0)):
-            if ((i["Price"] <= priceHigh) and (i["Price"] >= priceLow)):
-                results.append(i)
-            else:
-                if (i in results):
-                    results.remove(i)
+            if ((i["Price"] > priceHigh) or (i["Price"] < priceLow)):
+                flagged = True
         if ((not ratingHigh == 0) and (not ratingLow == 0)):
-            if ((i["Ratings"] <= ratingHigh) and (i["Ratings"] >= ratingLow)):
-                results.append(i)
-            else:
-                if (i in results):
-                    results.remove(i)
+            if ((i["Ratings"] > ratingHigh) or (i["Ratings"] < ratingLow)):
+                flagged = True
         if (not brand == ""):
-            if (i["Brand"] == brand):
-                results.append(i)
-            else:
-                if (i in results):
-                    results.remove(i)
+            if (not i["Brand"] == brand):
+                flagged = True
         if (not category == ""):
-            if (i["Category"] == category):
-                results.append(i)
-            else:
-                if (i in results):
-                    results.remove(i)
+            if (not i["Category"] == category):
+                flagged = True
         if (not subcategory == ""):
-            if (i["Subcategory"] == subcategory):
-                results.append(i)
-            else:
-                if (i in results):
-                    results.remove(i)
+            if (not i["Subcategory"] == subcategory):
+                flagged = True
+        if (not flagged):
+            filterResults.append(i)
     
     # Searches for the search term in the results. If the search term is not
     # found, the search term is searched for in the subcategory, category, and
     # brand of the results. 
-    for i in results:
+    for i in filterResults:
         if (i["Name"].lower() == search.lower()):
             finalResults.append(i)
         else:
@@ -180,8 +168,8 @@ def main():
 
     # Prints the results (for testing purposes)
     print("Search results: ")
-    for i in results:
+    for i in finalResults:
         print(i["Name"])
-    return results
+    return finalResults
 
 main()
