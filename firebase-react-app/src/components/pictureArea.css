@@ -1,0 +1,13 @@
+.picture-area {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .picture-area img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px;
+  }

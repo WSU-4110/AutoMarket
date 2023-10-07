@@ -1,0 +1,72 @@
+.App-header 
+{
+    background-color: #2d3a4b;
+    padding: 10px 20px;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 60px;
+    margin-right: 10px;
+  }
+  
+  .logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .buttons button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .buttons button:first-child {
+    margin-left: 0;
+  }
+  
+  .buttons button:hover {
+    background-color: #374c63;
+  }
+  
+  .buttons button:active {
+    background-color: #1d2733;
+  }
+  
+    .search-bar 
+    {
+        flex-grow: 1;
+        margin: 0 20px;
+    }
+
+  
+    .search-bar input 
+    {
+        width: calc(100% - 40px);
+        padding: 12px 20px;
+        font-size: 18px;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+    }
+    
