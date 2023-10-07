@@ -1,18 +1,19 @@
+// App.js
 import React from 'react';
-import './App.css';
-import Header from './Header';
-import WelcomeMessage from './WelcomeMessage';
-import MainPageBody from './MainPageBody';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './HomePage';
+import SignInPage from './pages/SignInPage';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div className="content">
-        <WelcomeMessage />
-        <MainPageBody />
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} index />
+          <Route path="signin" element={<SignInPage />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 

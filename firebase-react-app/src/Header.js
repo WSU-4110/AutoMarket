@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './images/AutoMarketLogo.png';
 import './components/header.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -15,12 +16,14 @@ const Header = () => {
       </div>
 
       <div className="buttons">
-        <button className="btn btn-primary">Sign In</button>
+        <button className="btn btn-primary">
+          <Link to="/signin" className="btn-link">Sign In</Link>
+        </button>
         <button className="btn btn-success">Sign Up</button>
         <button className="btn btn-info">Cart</button>
       </div>
     </header>
   );
-}
+};
 
 export default Header;
