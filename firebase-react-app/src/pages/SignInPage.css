@@ -1,0 +1,41 @@
+.signin-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+.signin-form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.input-container {
+    margin-bottom: 15px;
+}
+  
+/* Updated selector to target both email and password inputs */
+input[type="email"], input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+  
+.signin-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+.signin-btn:hover {
+    background-color: #0056b3;
+}

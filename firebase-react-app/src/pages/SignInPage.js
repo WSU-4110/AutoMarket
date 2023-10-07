@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { getDatabase, ref, set } from 'firebase/database';
+import './SignInPage.css'; // Importing styles
 
 const SignInPage = () => {
-
-  console.log('Rendering SignInPage...');
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,24 +14,38 @@ const SignInPage = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`Email: ${email}\nPassword: ${password}`);
+
+    const db = getDatabase();
+    const usersRef = ref(db, 'users');  
+
+    // Generate a unique reference for the new user data
+    const newUserRef = ref(usersRef);
+
+    await set(newUserRef, { 
+      email: email,
+      password: password  // IMPORTANT: Store passwords securely (hashed & salted) in production apps!
+    });
+
+    alert('User details saved to Firebase!');
+    setEmail('');  
+    setPassword('');
   };
 
   return (
-    <div>
+    <div className="signin-container">
       <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="signin-form">
+        <div className="input-container">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={handleEmailChange} />
+          <input type="email" id="email" value={email} onChange={handleEmailChange} placeholder="Enter your email" />
         </div>
-        <div>
+        <div className="input-container">
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} placeholder="Enter your password" />
         </div>
-        <button type="submit">Sign In</button>
+        <button type="submit" className="signin-btn">Sign In</button>
       </form>
     </div>
   );
