@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.part {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.part-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.part-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.part-price {
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.part-description {
+    margin-top: 10px;
+    color: #666666;
+}
+
+.buy-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}
