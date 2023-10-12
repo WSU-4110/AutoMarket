@@ -47,6 +47,13 @@ brandlist = ['AEM Performance Electronics', 'Borla Exhaust', 'Brembo',
              'NGK', 'Supertech', 'Bosch', 'JE Pistons']
 
 class Car:
+    def __init__(self):
+        self.model = ""
+        self.year = ""
+        self.engine = ""
+        self.transmission = ""
+        self.drivetrain = ""
+
     def __init__(self, model, year, engine, transmission, drivetrain):
         self.model = model
         self.year = year
@@ -114,18 +121,22 @@ def main():
     category = ""
     subcategory = ""
     flagged = False
+    
+    
     car = Car("Volkswagen GTI", "2005 - 2009", "2.0L Turbocharged I4",
-              "6-speed manual", "Front-wheel drive")
-    search = input("Search for products: ")
+              "6-speed manual", "Front-wheel drive") # Needs to be changed to the car object.
+    search = input("Enter search term: ") # Needs to be changed to the search bar input.
 
-    # Filters the results based on whether they fit the car or not.
-    for i in partlist:
-        if (i["Fits"][0] == car.get_model()
-            and i["Fits"][1] == car.get_year()
-            and i["Fits"][2] == car.get_engine()
-            and i["Fits"][3] == car.get_transmission()
-            and i["Fits"][4] == car.get_drivetrain()):
-            finalList.append(i)
+    # Checks if the car model is entered.
+    if (car.get_model() != ""):
+        # If it is, the results are filtered.
+        for i in partlist:
+            if (i["Fits"][0] == car.get_model()
+                and i["Fits"][1] == car.get_year()
+                and i["Fits"][2] == car.get_engine()
+                and i["Fits"][3] == car.get_transmission()
+                and i["Fits"][4] == car.get_drivetrain()):
+                finalList.append(i)
 
     # Excludes results that do not meet the filter criteria
     for i in finalList:
@@ -144,7 +155,7 @@ def main():
         if (not subcategory == ""):
             if (not i["Subcategory"] == subcategory):
                 flagged = True
-        if (not flagged):
+        if (flagged == False):
             filterResults.append(i)
     
     # Searches for the search term in the results. If the search term is not
@@ -165,11 +176,7 @@ def main():
                     else:
                         if (i["Brand"].lower() == search.lower()):
                             finalResults.append(i)
-
-    # Prints the results (for testing purposes)
-    print("Search results: ")
-    for i in finalResults:
-        print(i["Name"])
+                            
     return finalResults
 
 main()
