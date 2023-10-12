@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; 
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; 
 import { auth } from './../firebase';
 import './SignInPage.css';
 
 function App() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
@@ -18,20 +16,6 @@ function App() {
 
     return () => unsubscribe();
   }, []);
-
-  const register = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-      setCurrentUser(userCredential.user);
-      setMessage("Successfully registered!");
-
-      setRegisterEmail("");
-      setRegisterPassword("");
-      
-    } catch (error) {
-      setMessage(`Registration Error: ${error.message}`);
-    }
-  };
 
   const login = async () => {
     try {
@@ -57,19 +41,6 @@ function App() {
 
   return (
     <div className="signin-container">
-      <div className="signin-form">
-        <h2>Register</h2>
-        <div className="input-container">
-          <label>Email:</label>
-          <input type="email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} placeholder="Enter your email for registration" />
-        </div>
-
-        <div className="input-container">
-          <label>Password:</label>
-          <input type="password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} placeholder="Enter your password for registration" />
-        </div>
-        <button className="signin-btn" onClick={register}>Register</button>
-      </div>
 
       <div className="signin-form">
         <h2>Login</h2>
