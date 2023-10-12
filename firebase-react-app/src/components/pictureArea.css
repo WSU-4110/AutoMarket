@@ -1,0 +1,19 @@
+  .picture-area 
+  {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .picture-area img 
+  {
+    max-width: 250px; /* Adjust the maximum width as needed */
+    max-height: 250px; /* Adjust the maximum height as needed */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 100px; /* Adjust the margin as needed */
+  }
+  
+  .picture-area img:hover {
+    transform: scale(1.1); /* Enlarge the image on hover */
+  }

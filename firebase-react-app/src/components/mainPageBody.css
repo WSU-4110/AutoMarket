@@ -1,0 +1,30 @@
+.main-page-body {
+    padding: 40px;
+    background-color: white;
+    border-radius: 40px;
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .main-page-body p:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .main-page-body p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f0f0; /* Grey background color */
+    padding: 20px; /* Padding for the body */
+    color: #333; /* Darker text color for better contrast */
+  }
+  .main-page-body .col {
+    display: flex; /* Use flexbox */
+    justify-content: space-around; /* Space items evenly */
+  }
