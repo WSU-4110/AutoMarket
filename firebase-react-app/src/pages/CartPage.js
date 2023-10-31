@@ -1,25 +1,7 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; 
-import { auth } from './../firebase';
 import './CartPage.css';
 
-function SignUpPage() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [message, setMessage] = useState("");
-
-  const register = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-      setMessage("Successfully registered!");
-
-      setRegisterEmail("");
-      setRegisterPassword("");
-      
-    } catch (error) {
-      setMessage(`Registration Error: ${error.message}`);
-    }
-  };
+function CartPage() {
 
   return (
       
@@ -35,18 +17,21 @@ function SignUpPage() {
         <br></br>
         <br></br>
 
-        <h2>Item 1</h2>
-        <img src="pic_trulli.jpg" alt="Italiansfsdfsdfsd Trulli"></img>
+        <h2>Break Pads</h2>
+        <img src="homeBreakPadsImage.jpg" alt=" Break Pads"></img>
+        <i>Part Number: </i>
         <br></br>
         <br></br>
 
-        <h2>Item 2</h2>
-        <img src="pic_trulli.jpg" alt="Italiansfsdfsdfsd Trulli"></img>
+        <h2>Head Light</h2>
+        <img src="homeHeadlightImage.jpg" alt="Head Light"></img>
+        <i>Part Number: </i>
         <br></br>
         <br></br>
     
-        <h2>Item 3</h2>
-        <img src="pic_trulli.jpg" alt="Italiansfsdfsdfsd Trulli"></img>
+        <h2>Spark Plug</h2>
+        <img src="homeSparkImage.jpg" alt="Spark Plug"></img>
+        <i>Part Number: </i>
         <br></br>
         <br></br>
       </div>
@@ -56,4 +41,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default CartPage;
