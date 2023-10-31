@@ -69,4 +69,9 @@
         border: none;
         outline: none;
     }
-    
+
+    .dropdown-item.signout:hover 
+    {
+      background-color: #f8f9fa; /* Change to your desired hover background color */
+      cursor: pointer;
+    }
