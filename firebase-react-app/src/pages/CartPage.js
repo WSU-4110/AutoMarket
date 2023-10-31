@@ -1,43 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+function CartTitle() {
+  return <h1 className="underline-heading">Shopping Cart</h1>;
+}
+export { CartTitle };
+
+
+// CartItem.js
+import React from 'react';
+
+function CartItem({ itemName, imageSrc, partNumber }) {
+  return (
+    <div>
+      <h2>{itemName}</h2>
+      <img src={imageSrc} alt={itemName} />
+      <i>Part Number: {partNumber}</i>
+    </div>
+  );
+}
+
+export { CartItem };
+
+
+// CartPage.js
+import React from 'react';
 import './CartPage.css';
+import CartTitle from './CartTitle';
+import CartItem from './CartItem';
 
 function CartPage() {
-
   return (
-      
     <div className="signup-container">
-
       <div className="signup-form">
-       
-      <h1 class="underline-heading">Shopping Cart</h1>
-        <br></br>
-        <br></br>
-
+        <CartTitle />
+        <br />
+        <br />
         <h2>My Cart</h2>
-        <br></br>
-        <br></br>
-
-        <h2>Break Pads</h2>
-        <img src="homeBreakPadsImage.jpg" alt=" Break Pads"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
-
-        <h2>Head Light</h2>
-        <img src="homeHeadlightImage.jpg" alt="Head Light"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
-    
-        <h2>Spark Plug</h2>
-        <img src="homeSparkImage.jpg" alt="Spark Plug"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
+        <br />
+        <br />
+        <CartItem
+          itemName="Break Pads"
+          imageSrc="homeBreakPadsImage.jpg"
+          partNumber="12345"
+        />
+        <CartItem
+          itemName="Head Light"
+          imageSrc="homeHeadlightImage.jpg"
+          partNumber="67890"
+        />
+        <CartItem
+          itemName="Spark Plug"
+          imageSrc="homeSparkImage.jpg"
+          partNumber="54321"
+        />
       </div>
-
     </div>
-
   );
 }
 
