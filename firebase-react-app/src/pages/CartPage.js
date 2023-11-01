@@ -4,12 +4,11 @@ import './CartPage.css';
 function CartPage() {
 
   return (
-      
-    <div className="signup-container">
+    <div className="shoppingcart-container">
 
-      <div className="signup-form">
+      <div className="shoppingcart-form">
        
-      <h1 class="underline-heading">Shopping Cart</h1>
+      <h2>Shopping Cart</h2>
         <br></br>
         <br></br>
 
