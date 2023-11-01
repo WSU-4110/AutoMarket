@@ -19,9 +19,11 @@ h1[title="cart-title"] {
     text-decoration: underline;
     text-align: left;
   }
-  /*Product specifications*/
+  /*Product specifications
   .product-details {
   }
+  */
+  
   /*Image Specifications*/
   .product-image {
     font-style: italic;
