@@ -52,4 +52,4 @@ writePartData("102", "spark plug", "Ignition", "NGK", "S4");
 writePartData("103", "headlight", "Lighting", "Philips", "LX1");
 
 // Example usage
-writeUserData("AliAlsalman", "testing@gmail.com", "testpassword"); 
+writeUserData("AliAlsalman", "testing@gmail.com", "testpassword");

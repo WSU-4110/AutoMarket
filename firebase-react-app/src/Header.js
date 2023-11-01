@@ -30,10 +30,12 @@ const Header = () => {
 
   return (
     <header className="App-header" onClick={closeDropdown}>
-      <div className="logo">
-        <img src={logo} className="App-logo" alt="logo" />
-        <span className="logo-text">Auto Market</span>
-      </div>
+      <Link to="/" className="logo-link"> {/* Added a Link wrapper around the logo and text */}
+        <div className="logo">
+          <img src={logo} className="App-logo" alt="logo" />
+          <span className="logo-text">Auto Market</span>
+        </div>
+      </Link>
 
       <div className="search-bar">
         <input type="text" className="form-control" placeholder="Search" />

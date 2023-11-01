@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; 
 import { auth } from './../../firebase';
 import './SignInPage.css';
+import Header from "./../../Header";
 
 function App() {
+
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
@@ -40,33 +42,36 @@ function App() {
   };
 
   return (
-    <div className="signin-container">
+    <>
+      <Header />
 
-      <div className="signin-form">
-        <h2>Login</h2>
-        <div className="input-container">
-          <label>Email:</label>
-          <input type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} placeholder="Enter your email" />
+      <div className="signin-container">
+        <div className="signin-form">
+          <h2>Login</h2>
+          <div className="input-container">
+            <label>Email:</label>
+            <input type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} placeholder="Enter your email" />
+          </div>
+          <div className="input-container">
+            <label>Password:</label>
+            <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} placeholder="Enter your password" />
+          </div>
+          <button className="signin-btn" onClick={login}>Login</button>
         </div>
-        <div className="input-container">
-          <label>Password:</label>
-          <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} placeholder="Enter your password" />
+
+        <div className="logout-section">
+          <h2>Logout</h2>
+          {currentUser && (
+            <span className="user-info">
+              Logged in as: {currentUser?.email}
+            </span>
+          )}
+          <button className="signin-btn" onClick={logout}>Logout</button>
         </div>
-        <button className="signin-btn" onClick={login}>Login</button>
-      </div>
 
-      <div className="logout-section">
-        <h2>Logout</h2>
-        {currentUser && (
-          <span className="user-info">
-            Logged in as: {currentUser?.email}
-          </span>
-        )}
-        <button className="signin-btn" onClick={logout}>Logout</button>
+        {message && <div className="message">{message}</div>}
       </div>
-
-      {message && <div className="message">{message}</div>}
-    </div>
+    </>
   );
 }
 
