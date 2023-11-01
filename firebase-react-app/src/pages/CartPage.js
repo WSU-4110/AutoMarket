@@ -5,37 +5,36 @@ function CartPage() {
 
   return (
     <div className="shoppingcart-container">
+      <div className="MyCart-form">
+        </div>
 
-      <div className="shoppingcart-form">
-       
-      <h2>Shopping Cart</h2>
-        <br></br>
-        <br></br>
+      <h1 title="cart-title">MY CART</h1>
+      <br></br>
 
-        <h2>My Cart</h2>
-        <br></br>
-        <br></br>
+      <div className="product-container"> 
+        <div className="product">
+          <h2>Break Pads</h2>
+          <img src="homeBreakPadsImage.jpg" alt="Break Pads" />
+          <i>Part Number: </i>
+          <br /><br />
+        </div>
 
-        <h2>Break Pads</h2>
-        <img src="homeBreakPadsImage.jpg" alt=" Break Pads"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
+        <div className="product">
+          <h2>Head Light</h2>
+          <img src="homeHeadlightImage.jpg" alt="Head Light" />
+          <i>Part Number: </i>
+          <br /><br />
+        </div>
 
-        <h2>Head Light</h2>
-        <img src="homeHeadlightImage.jpg" alt="Head Light"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
-    
-        <h2>Spark Plug</h2>
-        <img src="homeSparkImage.jpg" alt="Spark Plug"></img>
-        <i>Part Number: </i>
-        <br></br>
-        <br></br>
+        <div className="product">
+          <h2>Spark Plug</h2>
+          <img src="homeSparkImage.jpg" alt="Spark Plug" />
+          <i>Part Number: </i>
+          <br /><br />
+        </div>
       </div>
-
     </div>
+
 
   );
 }
