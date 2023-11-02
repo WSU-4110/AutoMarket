@@ -1,6 +1,6 @@
 import React from 'react';
 import './CartPage.css';
-import Header from "./../Header"; // Assuming Header is in this location relative to CartPage
+import Header from "./../Header";
 
 function CartPage() {
   return (
