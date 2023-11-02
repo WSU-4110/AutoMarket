@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from './images/AutoMarketLogo.png';
 import './components/header.css';
 import { Link } from 'react-router-dom';
-import { auth } from './firebase'; // Import the Firebase auth service
+import { auth } from './firebase'; 
 
 const Header = () => {
   const [user, setUser] = useState(null);
@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <header className="App-header" onClick={closeDropdown}>
-      <Link to="/" className="logo-link"> {/* Added a Link wrapper around the logo and text */}
+      <Link to="/" className="logo-link"> 
         <div className="logo">
           <img src={logo} className="App-logo" alt="logo" />
           <span className="logo-text">Auto Market</span>
