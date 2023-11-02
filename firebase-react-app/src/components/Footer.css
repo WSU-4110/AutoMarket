@@ -1,34 +1,39 @@
-.section_padding {
-  padding: 4rem 4rem;
+body {
+  margin: 0;
+  padding: 0;
 }
 
+/* Styling the footer */
 .footer {
   background-color: #2d3a4b;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .sb_footer {
   display: flex;
   flex-direction: column;
 }
-
 .sb_footer-links {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  text-align: left;
+  text-align: center;
   margin-bottom: 2rem;
 }
 
 .sb_footer-links_div {
   width: 150px;
-  margin: 1rem;
+  margin: 2rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
-  color: white;
+  color: rgb(208, 204, 204);
+  font-weight: 600;
 }
 
 a {
@@ -37,8 +42,8 @@ a {
 }
 
 .sb_footer-links_div h4 {
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 17px;
+  line-height: 11px;
   margin-bottom: 0.9rem;
 }
 
@@ -63,9 +68,9 @@ a {
 .sb_footer-below-links p {
   font-size: 13px;
   line-height: 15px;
-  margin-left: 2rem;
+  margin-right: 3rem;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 hr {
   color: white !important;
@@ -77,4 +82,11 @@ hr {
   line-height: 15px;
   color: rgb(255, 255, 255);
   font-weight: 600;
+}
+
+p:hover {
+  color: white;
+  letter-spacing: 0.07em;
+  box-shadow: 2px 2px 5px rgb(143, 164, 235);
+  transition: 0.2s;
 }
