@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="sb_footer_section_padding">
-        <div className="sb_footer_links">
+        <div className="sb_footer-links">
           <div className="sb_footer-links_div">
             <h4>For More Inquries</h4>
             <a href="#">
@@ -70,7 +70,7 @@ const Footer = () => {
         <hr></hr>
         <div className="sb_footer-below">
           <div className="sb_footer-copyright">
-            <p>@{new Date().getFullYear()} AutoMarket. All right reserved. </p>
+            <a>@{new Date().getFullYear()} AutoMarket. All right reserved. </a>
           </div>
 
           <div className="sb_footer-below-links">
