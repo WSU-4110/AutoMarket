@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 //import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { get, getDatabase, ref, set } from "firebase/database";
+import { /*get,*/getDatabase, ref, set } from "firebase/database";
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -37,5 +37,19 @@ export function writeUserData(userId, email, password)
     });
 }
 
+export function writePartData(partId, partName, category, subcategory, fits) 
+{ 
+  const partRef = ref(db, 'parts/' + partId); 
+  set(partRef, {
+      name: partName,
+      category: category,
+      subcategory: subcategory,
+      fits: fits
+  });
+}
+writePartData("101 ", "break pads", "Breaks", "Brembo", "S1" );
+writePartData("102", "spark plug", "Ignition", "NGK", "S4");
+writePartData("103", "headlight", "Lighting", "Philips", "LX1");
+
 // Example usage
-writeUserData("AliAlsalman", "testing@gmail.com", "testpassword"); 
+writeUserData("AliAlsalman", "testing@gmail.com", "testpassword");
