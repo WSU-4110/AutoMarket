@@ -1,42 +1,68 @@
-import React from 'react';
-import './CartPage.css';
 import Header from "./../Header";
-
+import React, { useState } from 'react';
+import './CartPage.css';
+import homeBreakPadsImage from "../images/homeBreakPadsImage.jpg"
+import homeHeadlightImage from "../images/homeHeadlightImage.jpg"
+import homeSparkImage from "../images/homeSparkImage.jpg"
 function CartPage() {
+
   return (
     <>
-      <Header />
+    <Header/>
+  <div className="shoppingcart-container">
+    <div className='MyCart-container'>
+     <h1 title="cart-title">MY CART</h1>
+    </div>
 
-      <div className="signup-container">
-        <div className="signup-form">
-          <h1 className="underline-heading">Shopping Cart</h1>
-          <br></br>
-          <br></br>
+    <br></br>
 
-          <h2>My Cart</h2>
-          <br></br>
-          <br></br>
+  <div className="product-container">
 
-          <h2>Break Pads</h2>
-          <img src="homeBreakPadsImage.jpg" alt=" Break Pads"></img>
-          <i>Part Number: </i>
-          <br></br>
-          <br></br>
+    <div className='order-summary-container'>
+      <h2 title='order-title'>Order Summary</h2>
+    </div>
+    <div className='order-total-container'>
+      <h2 title='subtotal-title'>Item(s) Subtotal:</h2> 
+    </div>
 
-          <h2>Head Light</h2>
-          <img src="homeHeadlightImage.jpg" alt="Head Light"></img>
-          <i>Part Number: </i>
-          <br></br>
-          <br></br>
-      
-          <h2>Spark Plug</h2>
-          <img src="homeSparkImage.jpg" alt="Spark Plug"></img>
-          <i>Part Number: </i>
-          <br></br>
-          <br></br>
-        </div>
+    <div className="product">
+      <div className="product-image">
+        <img src={homeBreakPadsImage} alt="Break Pads"
+        width="100px"
+        height="80px" />
       </div>
-    </>
+      <div className="product-details">
+        <h2>Break Pads</h2>
+        <p>Part Number: 12345</p>
+      </div>
+    </div>
+
+    <div className="product">
+      <div className="product-image">
+        <img src={homeHeadlightImage} alt="Head Light" 
+        width="100px"
+        height="80px" />
+      </div>
+      <div className="product-details">
+        <h2>Head Light</h2>
+        <p>Part Number: 67890</p>
+      </div>
+    </div>
+
+    <div className="product">
+      <div className="product-image">
+        <img src={homeSparkImage} alt="Spark Plug" 
+        width="100px"
+        height="80px" />
+      </div>
+      <div className="product-details">
+        <h2>Spark Plug</h2>
+        <p>Part Number: 54321</p>
+      </div>
+    </div>
+  </div>
+</div>
+</>
   );
 }
 
