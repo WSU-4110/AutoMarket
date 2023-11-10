@@ -1,0 +1,64 @@
+/* MainBuyersPage.css */
+
+.buyers-container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item-info {
+    text-align: center;
+  }
+  
+  .item-info h2 {
+    margin-bottom: 20px;
+  }
+  
+  .item-info img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .price,
+  .stock,
+  .seller-name {
+    margin-bottom: 10px;
+  }
+  
+  .purchase-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .purchase-form label {
+    margin-right: 10px;
+  }
+  
+  .purchase-form input {
+    padding: 5px;
+    width: 60px;
+  }
+  
+  .purchase-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+  
