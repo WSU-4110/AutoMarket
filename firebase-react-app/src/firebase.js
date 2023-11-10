@@ -21,20 +21,18 @@ const app = initializeApp(firebaseConfig);
 // Initialize Authentication
 export const auth = getAuth(app)
 
-
-//const analytics = getAnalytics(app);
-
 // Initialize Database
 export const db = getDatabase(app);
 
-export function writeUserData(userId, email, password) 
-{ 
-    const userRef = ref(db, 'users/' + userId); 
-    set(userRef, 
-        {
-        email: email,
-        password: password  // Remember to store hashed & salted passwords in a production application!
-    });
+export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) {
+  const userRef = ref(db, 'users/' + userId);
+  set(userRef, {
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    phoneNumber: phoneNumber,
+    password: password
+  });
 }
 
 export function writePartData(partId, partName, category, subcategory, fits) 
@@ -50,6 +48,3 @@ export function writePartData(partId, partName, category, subcategory, fits)
 writePartData("101 ", "break pads", "Breaks", "Brembo", "S1" );
 writePartData("102", "spark plug", "Ignition", "NGK", "S4");
 writePartData("103", "headlight", "Lighting", "Philips", "LX1");
-
-// Example usage
-writeUserData("AliAlsalman", "testing@gmail.com", "testpassword");
