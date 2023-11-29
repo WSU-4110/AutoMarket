@@ -24,9 +24,11 @@ export const auth = getAuth(app)
 // Initialize Database
 export const db = getDatabase(app);
 
-export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) {
+export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) 
+{
   const userRef = ref(db, 'users/' + userId);
-  set(userRef, {
+  set(userRef, 
+    {
     email: email,
     firstName: firstName,
     lastName: lastName,
