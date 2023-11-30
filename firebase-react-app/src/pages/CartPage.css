@@ -79,8 +79,8 @@
   margin-top: 20px;
 }
 .subtotal-box {
-  color:#1d4672;
   display: flex;
+  flex-direction: column; /* Ensure elements are stacked vertically */
   justify-content: space-between;
   align-items: center;
   margin: 10px;
@@ -94,4 +94,30 @@
 .subtotal-total {
   font-size: 1.5em; /* Adjust the font size as needed */
   font-weight: bold;
+}
+.small-text {
+  font-size: 12px; /* Adjust the font size for small text */
+  color: #777; /* Adjust the color as needed */
+}
+.checkout-container {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #1d4672;
+  color: white;
+}
+.checkout-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1d4672;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.checkout-button:hover {
+  background-color: #154063;
 }

@@ -8,9 +8,9 @@ import homeSparkImage from '../images/homeSparkImage.jpg';
 function CartPage() {
   // Define the product data with prices
   const products = [
-    { name: 'Break Pads', price: 19.99 },
+    { name: 'Break Pads', price: 32.49 },
     { name: 'Morimoto XB LED Headlights', price: 89.99 },
-    { name: 'NGK Spark Plugs', price: 5.99 },
+    { name: 'NGK Spark Plugs', price: 9.19 },
   ];
 
   // State to hold the subtotal
@@ -54,7 +54,7 @@ function CartPage() {
               <p>Part Number: 12345</p>
             </div>
             <div className="product-price">
-              $19.99 {/* Replace this with the actual price */}
+              $32.49 {/* Replace this with the actual price */}
             </div>
           </div>
 
@@ -90,13 +90,18 @@ function CartPage() {
               <p>Part Number: 54321</p>
             </div>
             <div className="product-price">
-              $5.99 {/* Replace this with the actual price */}
+              $9.19 {/* Replace this with the actual price */}
             </div>
           </div>
           <div className="subtotal-box">
             <h2>SUBTOTAL</h2>
             <div className="subtotal-total">${subtotal.toFixed(2)}</div>
+            <p className="small-text">Taxes and shipping calculated at checkout</p>
           </div>
+          <div className="checkout-container">
+          <h2>Checkout</h2>
+          {/* Add any checkout-related content here */}
+        </div>
         </div>
       </div>
     </>
