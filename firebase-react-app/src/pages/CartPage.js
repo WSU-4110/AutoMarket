@@ -37,6 +37,9 @@ function CartPage() {
               <h2>Break Pads</h2>
               <p>Part Number: 12345</p>
             </div>
+            <div className="product-price">
+              $19.99 {/* Replace this with the actual price */}
+            </div>
           </div>
 
           <div className="product">
@@ -52,6 +55,9 @@ function CartPage() {
               <h2>Morimoto XB LED Headlights</h2>
               <p>Part Number: 67890</p>
             </div>
+            <div className="product-price">
+              $89.99 {/* Replace this with the actual price */}
+            </div>
           </div>
 
           <div className="product">
@@ -66,6 +72,9 @@ function CartPage() {
             <div className="product-details">
               <h2>NGK Spark Plugs</h2>
               <p>Part Number: 54321</p>
+            </div>
+            <div className="product-price">
+              $5.99 {/* Replace this with the actual price */}
             </div>
           </div>
         </div>
