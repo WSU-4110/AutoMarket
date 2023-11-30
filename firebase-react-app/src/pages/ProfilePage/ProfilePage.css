@@ -1,10 +1,18 @@
 
+				                
+body{margin-top:20px;}
+.avatar{
+width:200px;
+height:200px;
+}				              
 
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
   .profile-title {
@@ -18,17 +26,29 @@
   }
   
   .sign-out-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ff6347;
     color: #fff;
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+    transition: 0.5s;
   }
   
   .sign-out-btn:hover {
     background-color: #d64532;
   }
-  
+
+  .sellers-page-btn 
+  {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    transition: 0.5s;
+  }
