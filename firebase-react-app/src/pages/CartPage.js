@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './../Header';
 import './CartPage.css';
 import homeBreakPadsImage from '../images/homeBreakPadsImage.jpg';
@@ -6,6 +6,22 @@ import homeHeadlightImage from '../images/homeHeadlightImage.jpg';
 import homeSparkImage from '../images/homeSparkImage.jpg';
 
 function CartPage() {
+  // Define the product data with prices
+  const products = [
+    { name: 'Break Pads', price: 19.99 },
+    { name: 'Morimoto XB LED Headlights', price: 89.99 },
+    { name: 'NGK Spark Plugs', price: 5.99 },
+  ];
+
+  // State to hold the subtotal
+  const [subtotal, setSubtotal] = useState(0);
+
+   // Calculate the subtotal when the component mounts or when products change
+   useEffect(() => {
+    const total = products.reduce((acc, product) => acc + product.price, 0);
+    setSubtotal(total);
+  }, [products]);
+
   return (
     <>
       <Header />
@@ -76,6 +92,10 @@ function CartPage() {
             <div className="product-price">
               $5.99 {/* Replace this with the actual price */}
             </div>
+          </div>
+          <div className="subtotal-box">
+            <h2>SUBTOTAL</h2>
+            <div className="subtotal-total">${subtotal.toFixed(2)}</div>
           </div>
         </div>
       </div>
