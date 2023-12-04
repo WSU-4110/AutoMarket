@@ -24,6 +24,8 @@ export const auth = getAuth(app)
 // Initialize Database
 export const db = getDatabase(app);
 
+
+
 export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) 
 {
   const userRef = ref(db, 'users/' + userId);
@@ -37,16 +39,20 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
   });
 }
 
-export function writePartData(partId, partName, category, subcategory, fits) 
-{ 
-  const partRef = ref(db, 'parts/' + partId); 
-  set(partRef, {
-      name: partName,
+export async function writePartData(partId, partName, category, subcategory, fits, price) {
+  try {
+    const partRef = ref(db, `parts/${partId}`);
+    await set(partRef, {
+      partName: partName,
       category: category,
       subcategory: subcategory,
-      fits: fits
-  });
+      fits: fits,
+      price: price
+    });
+  } catch (error) 
+  {
+    console.error("Error writing data to Firebase:", error);
+    throw error;
+  }
+
 }
-writePartData("101 ", "break pads", "Breaks", "Brembo", "S1" );
-writePartData("102", "spark plug", "Ignition", "NGK", "S4");
-writePartData("103", "headlight", "Lighting", "Philips", "LX1");
