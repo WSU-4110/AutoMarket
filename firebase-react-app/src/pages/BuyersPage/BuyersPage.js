@@ -4,7 +4,6 @@ import './BuyersPage.css';
 import Header from "./../../Header";
 import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
 
-
 function MainBuyersPage() {
   const [parts, setParts] = useState([]);
 
@@ -16,7 +15,7 @@ function MainBuyersPage() {
 
   return (
     <div className="buyers-container">
-            <Header />
+      <Header />
       <h1>Available Parts</h1>
       <div className="parts-list">
         {parts.length > 0 ? (
@@ -24,7 +23,7 @@ function MainBuyersPage() {
             <div key={part.id} className="part-item">
               <h2>{part.partName}</h2>
               <img 
-                src={part.imagePath || NoPhotoAvailable} 
+                src={part.imageUrl || NoPhotoAvailable}
                 alt={part.partName} 
                 className="part-image"
               />

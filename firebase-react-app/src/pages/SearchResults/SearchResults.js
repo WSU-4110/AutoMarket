@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { SearchContext } from './SearchContext';
 import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
+import Header from "./../../Header";
 
 const SearchResults = () => {
   const { searchResults } = useContext(SearchContext);
 
   return (
     <div className="buyers-container">
+      <Header />
       <h1>Search Results</h1>
       <div className="parts-list">
         {searchResults.length > 0 ? (
@@ -14,7 +16,7 @@ const SearchResults = () => {
             <div key={part.id} className="part-item">
               <h2>{part.partName}</h2>
               <img 
-                src={part.imagePath || NoPhotoAvailable} 
+                src={part.imageUrl || NoPhotoAvailable}  // Change here
                 alt={part.partName} 
                 className="part-image"
               />

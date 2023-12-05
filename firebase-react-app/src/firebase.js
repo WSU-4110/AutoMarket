@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, onValue } from "firebase/database"; 
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from 'firebase/auth';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
@@ -22,7 +23,18 @@ export const auth = getAuth(app)
 // Initialize Database
 export const db = getDatabase(app);
 
+// Initialize Storage
+const storage = getStorage(app);
 
+
+
+export async function uploadImageAndGetURL(file, partId)
+{
+  const imageRef = storageRef(storage, `parts/${partId}`);
+  await uploadBytes(imageRef, file);
+  const url = await getDownloadURL(imageRef);
+  return url;
+}
 
 export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) 
 {
@@ -37,23 +49,24 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
   });
 }
 
-export async function writePartData(partId, partName, category, subcategory, fits, price) {
+export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl) {
+  const partRef = ref(db, `parts/${partId}`);
   try {
-    const partRef = ref(db, `parts/${partId}`);
-    await set(partRef, {
-      partName: partName,
-      category: category,
-      subcategory: subcategory,
-      fits: fits,
-      price: price
+    await set(partRef, 
+      {
+      partName,
+      category,
+      subcategory,
+      fits,
+      price,
+      imageUrl
     });
-  } catch (error) 
-  {
+  } catch (error) {
     console.error("Error writing data to Firebase:", error);
     throw error;
   }
-
 }
+
 export function readPartsData(callback) 
 {
   const partsRef = ref(db, 'parts/');
@@ -80,10 +93,7 @@ export function searchPartsByName(query, callback)
     if (data) 
     {
       const partsArray = Object.keys(data)
-        .map(key => (
-          { 
-            id: key, ...data[key] 
-          }))
+        .map(key => ({ id: key, ...data[key] }))
         .filter(part => part.partName.toLowerCase().includes(query.toLowerCase()));
       callback(partsArray);
     } 
