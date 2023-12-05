@@ -1,68 +1,68 @@
+/* Base styling for the profile page */
 .profilePage {
   font-family: 'Arial', sans-serif;
   color: #333;
-  padding: 20px;
-  max-width: 800px;
-  margin: 20px auto;
   background-color: #fff;
+  max-width: 800px;
+  padding: 20px;
+  margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Styling for headings */
 .profilePage h1 {
   color: #4a4e69;
+  font-size: 32px;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
+  margin: 20px 0 30px;
 }
 
-.profilePage > div:not(.header) { 
+/* Common styling for blocks within the profile page */
+.profilePage > div:not(.header) {
   background-color: #f8f9fa;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-} 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Paragraph styling */
 .profilePage p {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 15px;
 }
 
+/* Base button styling */
 .profilePage button {
   background-color: #007bff;
   color: white;
+  font-size: 16px;
   padding: 12px 25px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
   transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Hover effect for buttons */
 .profilePage button:hover {
   background-color: #0000ff;
   transform: translateY(-2px);
 }
 
+/* Additional styling for specific buttons */
 .profilePage .sellers-page-btn button {
   background-color: #2196f3;
 }
 
 .profilePage .sellers-page-btn button:hover {
   background-color: #0056b3;
-  transform: translateY(-2px);
 }
 
+/* Spacing for the first button in a button group */
 .profilePage > div > button:first-of-type {
   margin-right: 15px;
-}
-
-.profilePage h1 {
-  color: #4a4e69;
-  text-align: center;
-  margin: 20px 0 30px; 
-  font-size: 32px;
-  font-weight: bold;
 }
