@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { /*get,*/getDatabase, ref, set } from "firebase/database";
-import { getAuth } from 'firebase/auth'
+import { getDatabase, ref, set, onValue } from "firebase/database"; 
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
@@ -53,4 +53,20 @@ export async function writePartData(partId, partName, category, subcategory, fit
     throw error;
   }
 
+}
+export function readPartsData(callback) 
+{
+  const partsRef = ref(db, 'parts/');
+  onValue(partsRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      const partsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+      callback(partsArray);
+    } else {
+      callback([]); 
+    }
+  }, (error) => {
+    console.error("Error reading data from Firebase:", error);
+    callback([]); 
+  });
 }

@@ -1,48 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { readPartsData } from './../../firebase'; 
 import './BuyersPage.css';
+import Header from "./../../Header";
+import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
 
-function MainBuyersPage() 
-{
-  const [itemName, setItemName] = useState("Example Item");
-  const [itemImage, setItemImage] = useState("/path/to/image.jpg"); 
-  const [price, setPrice] = useState(99.99); 
-  const [stock, setStock] = useState(10); 
-  const [sellerName, setSellerName] = useState("Sellers Name"); 
-  const [quantity, setQuantity] = useState(9);
-  const [purchaseMessage, setPurchaseMessage] = useState("");
+function MainBuyersPage() {
+  const [parts, setParts] = useState([]);
 
-  const handlePurchase = () => {
-    if (quantity > stock) {
-      setPurchaseMessage("Not enough stock for your purchase amount.");
-    } else {
-      // Here you would handle the purchase, like sending data to the backend
-      setStock(stock - quantity); // Update stock
-      setPurchaseMessage(`You have successfully purchased ${quantity} item(s) of ${itemName}.`);
-    }
-  };
+  useEffect(() => {
+    readPartsData((fetchedParts) => {
+      setParts(fetchedParts);
+    });
+  }, []);
 
   return (
     <div className="buyers-container">
-      <div className="item-info">
-        <h2>{itemName}</h2>
-        <img src={itemImage} alt={itemName} />
-        <p className="price">Price: ${price.toFixed(2)}</p>
-        <p className="stock">In Stock: {stock}</p>
-        <p className="seller-name">Sold by: {sellerName}</p>
-        <div className="purchase-form">
-          <label htmlFor="quantity">Quantity:</label>
-          <input 
-            type="number" 
-            id="quantity" 
-            value={quantity} 
-            min="1" 
-            max={stock}
-            onChange={(e) => setQuantity(Math.max(1, Math.min(stock, Number(e.target.value))))} 
-            placeholder="Enter quantity" 
-          />
-          <button className="purchase-btn" onClick={handlePurchase}>Purchase</button>
-        </div>
-        {purchaseMessage && <div className="message">{purchaseMessage}</div>}
+            <Header />
+      <h1>Available Parts</h1>
+      <div className="parts-list">
+        {parts.length > 0 ? (
+          parts.map(part => (
+            <div key={part.id} className="part-item">
+              <h2>{part.partName}</h2>
+              <img 
+                src={part.imagePath || NoPhotoAvailable} 
+                alt={part.partName} 
+                className="part-image"
+              />
+              <div className="part-details">
+                <p>Category: {part.category}</p>
+                <p>Fits: {part.fits}</p>
+                <p>Price: ${part.price}</p>
+                <p>Sold by: {part.sellerName}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No parts available at the moment.</p>
+        )}
       </div>
     </div>
   );
