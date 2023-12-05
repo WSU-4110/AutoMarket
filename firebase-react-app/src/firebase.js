@@ -1,8 +1,6 @@
-// Import the functions you need from the SDKs you need
-//import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { /*get,*/getDatabase, ref, set } from "firebase/database";
-import { getAuth } from 'firebase/auth'
+import { getDatabase, ref, set, onValue } from "firebase/database"; 
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
@@ -24,6 +22,8 @@ export const auth = getAuth(app)
 // Initialize Database
 export const db = getDatabase(app);
 
+
+
 export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) 
 {
   const userRef = ref(db, 'users/' + userId);
@@ -37,16 +37,36 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
   });
 }
 
-export function writePartData(partId, partName, category, subcategory, fits) 
-{ 
-  const partRef = ref(db, 'parts/' + partId); 
-  set(partRef, {
-      name: partName,
+export async function writePartData(partId, partName, category, subcategory, fits, price) {
+  try {
+    const partRef = ref(db, `parts/${partId}`);
+    await set(partRef, {
+      partName: partName,
       category: category,
       subcategory: subcategory,
-      fits: fits
+      fits: fits,
+      price: price
+    });
+  } catch (error) 
+  {
+    console.error("Error writing data to Firebase:", error);
+    throw error;
+  }
+
+}
+export function readPartsData(callback) 
+{
+  const partsRef = ref(db, 'parts/');
+  onValue(partsRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      const partsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+      callback(partsArray);
+    } else {
+      callback([]); 
+    }
+  }, (error) => {
+    console.error("Error reading data from Firebase:", error);
+    callback([]); 
   });
 }
-writePartData("101 ", "break pads", "Breaks", "Brembo", "S1" );
-writePartData("102", "spark plug", "Ignition", "NGK", "S4");
-writePartData("103", "headlight", "Lighting", "Philips", "LX1");
