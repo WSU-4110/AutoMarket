@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { readPartsData } from './../../firebase'; 
-import './BuyersPage.css';
-import Header from "./../../Header";
+import React, { useContext } from 'react';
+import { SearchContext } from './SearchContext';
 import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
+import Header from "./../../Header";
 
-function MainBuyersPage() {
-  const [parts, setParts] = useState([]);
-
-  useEffect(() => {
-    readPartsData((fetchedParts) => {
-      setParts(fetchedParts);
-    });
-  }, []);
+const SearchResults = () => {
+  const { searchResults } = useContext(SearchContext);
 
   return (
     <div className="buyers-container">
       <Header />
-      <h1>Available Parts</h1>
+      <h1>Search Results</h1>
       <div className="parts-list">
-        {parts.length > 0 ? (
-          parts.map(part => (
+        {searchResults.length > 0 ? (
+          searchResults.map(part => (
             <div key={part.id} className="part-item">
               <h2>{part.partName}</h2>
               <img 
-                src={part.imageUrl || NoPhotoAvailable}
+                src={part.imageUrl || NoPhotoAvailable}  // Change here
                 alt={part.partName} 
                 className="part-image"
               />
@@ -36,11 +29,11 @@ function MainBuyersPage() {
             </div>
           ))
         ) : (
-          <p>No parts available at the moment.</p>
+          <p>No results found.</p>
         )}
       </div>
     </div>
   );
-}
+};
 
-export default MainBuyersPage;
+export default SearchResults;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import Header from './../../Header';
+import { writePartData, uploadImageAndGetURL } from './../../firebase';
+import { v4 as uuidv4 } from 'uuid';
 import './SellersPage.css';
-import Header from "./../../Header";
-import { writePartData } from './../../firebase';
-import { v4 as uuidv4 } from 'uuid'; 
 
 function SellersPage() {
   const [partName, setPartName] = useState("");
@@ -10,31 +10,32 @@ function SellersPage() {
   const [subcategory, setSubcategory] = useState("");
   const [fits, setFits] = useState("");
   const [price, setPrice] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [message, setMessage] = useState("");
 
   const submitForm = async () => {
     try {
-      if (!partName || !category || !subcategory || !fits || !price) {
-        throw new Error("All fields are required.");
+      if (!partName || !category || !subcategory || !fits || !price || !imageFile) {
+        throw new Error("All fields including the image are required.");
       }
 
+      const imageUrl = await uploadImageAndGetURL(imageFile);
       const partId = uuidv4();
+      await writePartData(partId, partName, category, subcategory, fits, price, imageUrl);
 
-      console.log("Submitting:", { partName, category, subcategory, fits, price });
-      await writePartData(partId, partName, category, subcategory, fits, price);
-
-      setMessage("Form submitted successfully!");
+      setMessage("Part submitted successfully!");
       setPartName("");
       setCategory("");
       setSubcategory("");
       setFits("");
       setPrice("");
+      setImageFile(null);
     } catch (error) {
-      console.error(error);
+      console.error("Submission Error:", error);
       setMessage(`Submission Error: ${error.message}`);
     }
   };
-
+  
   return (
     <div> 
           <Header />
@@ -92,9 +93,20 @@ function SellersPage() {
           />
         </div>
 
+        <div className="input-container">
+        <label>Image:</label>
+        <input
+          type="file"
+          onChange={(e) => setImageFile(e.target.files[0])}
+          accept="image/*"
+        />
+      </div>
+
         <button className="submit-btn" onClick={submitForm}>
           Submit
         </button>
+
+        {message && <div className="message">{message}</div>}  
       </div>
 
       {message && <div className="message">{message}</div>}

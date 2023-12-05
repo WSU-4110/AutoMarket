@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import logo from "./images/AutoMarketLogo.png";
-import "./components/header.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
 import Headroom from "react-headroom";
+import { Link } from "react-router-dom";
 import { auth } from './firebase';
-
-const Header = () => {
+import { SearchContext } from './pages/SearchResults/SearchContext';
+import { searchPartsByName } from './firebase'; 
+import logo from "./images/AutoMarketLogo.png";
+import { useNavigate } from 'react-router-dom'; 
+import "./components/header.css";
+const Header = () => 
+{
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { setSearchResults } = useContext(SearchContext);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -29,6 +36,15 @@ const Header = () => {
     setShowDropdown(false);
   };
 
+
+  const handleSearch = () => {
+    searchPartsByName(searchQuery, (results) => 
+    {
+      setSearchResults(results);
+      navigate('/searchresults'); 
+    });
+  };
+
   return (
     <Headroom>
       <header className="App-header" onClick={closeDropdown}>
@@ -40,7 +56,14 @@ const Header = () => {
         </Link>
 
         <div className="search-bar">
-          <input type="text" className="form-control" placeholder="Search" />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
 
         <div className="buttons">
