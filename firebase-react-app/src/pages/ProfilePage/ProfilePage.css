@@ -2,9 +2,9 @@
 .profilePage {
   font-family: 'Arial', sans-serif;
   color: #333;
+  padding: 20px;
   background-color: #fff;
   max-width: 800px;
-  padding: 20px;
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -13,7 +13,7 @@
 /* Styling for headings */
 .profilePage h1 {
   color: #4a4e69;
-  font-size: 32px;
+  font-size: 32px; /* Adjust this value as needed */
   font-weight: bold;
   text-align: center;
   margin: 20px 0 30px;
@@ -24,8 +24,8 @@
   background-color: #f8f9fa;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 /* Paragraph styling */
@@ -60,6 +60,7 @@
 
 .profilePage .sellers-page-btn button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 /* Spacing for the first button in a button group */
