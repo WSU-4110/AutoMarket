@@ -70,3 +70,30 @@ export function readPartsData(callback)
     callback([]); 
   });
 }
+
+export function searchPartsByName(query, callback) 
+{
+  const partsRef = ref(db, 'parts/');
+  onValue(partsRef, (snapshot) => 
+  {
+    const data = snapshot.val();
+    if (data) 
+    {
+      const partsArray = Object.keys(data)
+        .map(key => (
+          { 
+            id: key, ...data[key] 
+          }))
+        .filter(part => part.partName.toLowerCase().includes(query.toLowerCase()));
+      callback(partsArray);
+    } 
+    else 
+    {
+      callback([]);
+    }
+  }, (error) => 
+  {
+    console.error("Error searching data in Firebase:", error);
+    callback([]);
+  });
+}
