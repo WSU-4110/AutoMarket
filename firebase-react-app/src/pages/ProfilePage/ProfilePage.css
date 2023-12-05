@@ -31,7 +31,7 @@
 }
 
 .profilePage button {
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
   padding: 12px 25px;
   border: none;
@@ -42,7 +42,7 @@
 }
 
 .profilePage button:hover {
-  background-color: #45a049;
+  background-color: #0000ff;
   transform: translateY(-2px);
 }
 
@@ -51,7 +51,7 @@
 }
 
 .profilePage .sellers-page-btn button:hover {
-  background-color: #0b7dda;
+  background-color: #0056b3;
   transform: translateY(-2px);
 }
 

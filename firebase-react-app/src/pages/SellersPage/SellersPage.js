@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SellersPage.css';
+import Header from "./../../Header";
 import { writePartData } from './../../firebase';
 import { v4 as uuidv4 } from 'uuid'; 
 
@@ -35,6 +36,8 @@ function SellersPage() {
   };
 
   return (
+    <div> 
+          <Header />
     <div className="sellers-container">
       <div className="sellers-form">
         <h2>Sellers</h2>
@@ -95,7 +98,9 @@ function SellersPage() {
       </div>
 
       {message && <div className="message">{message}</div>}
+    </div>    
     </div>
+
   );
 }
 

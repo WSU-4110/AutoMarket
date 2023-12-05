@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import './MainBuyersPage.css';
+import './BuyersPage.css';
 
-function MainBuyersPage() {
+function MainBuyersPage() 
+{
   const [itemName, setItemName] = useState("Example Item");
-  const [itemImage, setItemImage] = useState("/path/to/image.jpg"); // replace with your image path
-  const [price, setPrice] = useState(99.99); // replace with your price
-  const [stock, setStock] = useState(10); // replace with your stock number
-  const [sellerName, setSellerName] = useState("Sellers Name"); // replace with your seller's name
+  const [itemImage, setItemImage] = useState("/path/to/image.jpg"); 
+  const [price, setPrice] = useState(99.99); 
+  const [stock, setStock] = useState(10); 
+  const [sellerName, setSellerName] = useState("Sellers Name"); 
   const [quantity, setQuantity] = useState(9);
   const [purchaseMessage, setPurchaseMessage] = useState("");
 

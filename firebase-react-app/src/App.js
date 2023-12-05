@@ -7,6 +7,7 @@ import SignUpPage from './pages/SignUpPage/SignUpPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import CartPage from './pages/CartPage';
 import SellersPage from './pages/SellersPage/SellersPage';
+import BuyersPage from './pages/BuyersPage/BuyersPage';
 import Profile from './pages/ProfilePage/ProfilePage';
 
 function App() 
@@ -26,6 +27,8 @@ function App()
           <Route path="profile" element={<ProfilePage />} />
           <Route path="/" element={<Profile />} index />
           <Route path="sellers" element={<SellersPage />} />
+          <Route path="/" element={<Profile />} index />
+          <Route path="buyers" element={<BuyersPage />} />
 
         </Routes>
       </div>

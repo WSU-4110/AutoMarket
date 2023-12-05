@@ -51,7 +51,7 @@ const Header = () => {
                 type="button"
                 onClick={toggleDropdown}
               >
-                Hello, {user.displayName || user.email}
+               {user.displayName || user.email} 
               </button>
               {showDropdown && (
                 <div className="dropdown-menu">
@@ -70,6 +70,7 @@ const Header = () => {
                   </span>
                 </div>
               )}
+
             </div>
           ) : (
             <>
