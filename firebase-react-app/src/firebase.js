@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
@@ -28,8 +30,8 @@ const storage = getStorage(app);
 
 
 
-export async function uploadImageAndGetURL(file, partId)
-{
+export async function uploadImageAndGetURL(file) {
+  const partId = uuidv4();
   const imageRef = storageRef(storage, `parts/${partId}`);
   await uploadBytes(imageRef, file);
   const url = await getDownloadURL(imageRef);
@@ -49,17 +51,17 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
   });
 }
 
-export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl) {
+export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName) {
   const partRef = ref(db, `parts/${partId}`);
   try {
-    await set(partRef, 
-      {
+    await set(partRef, {
       partName,
       category,
       subcategory,
       fits,
       price,
-      imageUrl
+      imageUrl,
+      sellerName: sellerName || 'Anonymous'
     });
   } catch (error) {
     console.error("Error writing data to Firebase:", error);
@@ -75,12 +77,14 @@ export function readPartsData(callback)
     if (data) {
       const partsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
       callback(partsArray);
-    } else {
+    } else 
+    {
       callback([]); 
     }
-  }, (error) => {
+  }, (error) => 
+  {
     console.error("Error reading data from Firebase:", error);
-    callback([]); 
+    callback([]);
   });
 }
 
