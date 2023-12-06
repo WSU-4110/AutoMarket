@@ -5,7 +5,8 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "fire
 import { v4 as uuidv4 } from 'uuid';
 
 
-const firebaseConfig = {
+const firebaseConfig = 
+{
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
   authDomain: "auto-market-37b17.firebaseapp.com",
   databaseURL: "https://auto-market-37b17-default-rtdb.firebaseio.com",
@@ -30,7 +31,8 @@ const storage = getStorage(app);
 
 
 
-export async function uploadImageAndGetURL(file) {
+export async function uploadImageAndGetURL(file) 
+{
   const partId = uuidv4();
   const imageRef = storageRef(storage, `parts/${partId}`);
   await uploadBytes(imageRef, file);
@@ -51,10 +53,12 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
   });
 }
 
-export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName) {
+export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName) 
+{
   const partRef = ref(db, `parts/${partId}`);
   try {
-    await set(partRef, {
+    await set(partRef, 
+      {
       partName,
       category,
       subcategory,
@@ -72,7 +76,8 @@ export async function writePartData(partId, partName, category, subcategory, fit
 export function readPartsData(callback) 
 {
   const partsRef = ref(db, 'parts/');
-  onValue(partsRef, (snapshot) => {
+  onValue(partsRef, (snapshot) => 
+  {
     const data = snapshot.val();
     if (data) {
       const partsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
@@ -111,3 +116,21 @@ export function searchPartsByName(query, callback)
     callback([]);
   });
 }
+
+export const updateUserName = async (userId, firstName, lastName) => 
+{
+  const userRef = ref(db, 'users/' + userId);
+  await set(userRef, { firstName, lastName });
+};
+
+export const updateUserEmail = async (newEmail) => 
+{
+  await auth.currentUser.updateEmail(newEmail);
+};
+
+export const updateUserPassword = async (newPassword) => {
+  if (!auth.currentUser) {
+    throw new Error("No authenticated user found");
+  }
+  await auth.currentUser.updatePassword(newPassword);
+};
