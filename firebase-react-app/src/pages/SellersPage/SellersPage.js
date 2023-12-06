@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './../../Header';
-import { writePartData, uploadImageAndGetURL } from './../../firebase';
+import { writePartData, uploadImageAndGetURL, auth } from './../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid';
 import './SellersPage.css';
 
@@ -11,7 +12,19 @@ function SellersPage() {
   const [fits, setFits] = useState("");
   const [price, setPrice] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [sellerName, setSellerName] = useState("Anonymous"); 
   const [message, setMessage] = useState("");
+
+  useEffect(() => 
+  {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser && currentUser.displayName) {
+        setSellerName(currentUser.displayName);
+      }
+    });
+
+    return () => unsubscribe(); 
+  }, []);
 
   const submitForm = async () => {
     try {
@@ -21,7 +34,7 @@ function SellersPage() {
 
       const imageUrl = await uploadImageAndGetURL(imageFile);
       const partId = uuidv4();
-      await writePartData(partId, partName, category, subcategory, fits, price, imageUrl);
+      await writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName);
 
       setMessage("Part submitted successfully!");
       setPartName("");
@@ -35,7 +48,7 @@ function SellersPage() {
       setMessage(`Submission Error: ${error.message}`);
     }
   };
-  
+
   return (
     <div> 
           <Header />

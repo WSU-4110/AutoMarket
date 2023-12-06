@@ -61,3 +61,19 @@
   color: #888;
   margin-top: 50px;
 }
+
+.add-to-cart-btn {
+  padding: 10px 15px;
+  background-color: #4CAF50; /* A green background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px; /* Larger font size */
+  cursor: pointer;
+  margin-top: 10px; /* Spacing from the details */
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #45a049; /* Darker shade for hover effect */
+}
