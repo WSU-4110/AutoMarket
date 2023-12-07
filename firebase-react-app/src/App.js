@@ -1,30 +1,33 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { SearchProvider } from './pages/SearchResults/SearchContext';
 import HomePage from './HomePage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import CartPage from './pages/CartPage';
+import SellersPage from './pages/SellersPage/SellersPage';
+import BuyersPage from './pages/BuyersPage/BuyersPage';
+import SearchResults from './pages/SearchResults/SearchResults';
 
-function App() 
-{
+function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
+      <SearchProvider> {/* Wrap everything within SearchProvider */}
+        <div className="App">
 
-          <Route path="/" element={<HomePage />} index />
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="/" element={<HomePage />} index />
-          <Route path="signup" element={<SignUpPage />} />
-          <Route path="/" element={<HomePage />} index />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="/" element={<HomePage />} index />
-          <Route path="profile" element={<ProfilePage />} />
-
-        </Routes>
-      </div>
+          <Routes>
+            <Route path="/" element={<HomePage />} index />
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="signup" element={<SignUpPage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="sellers" element={<SellersPage />} />
+            <Route path="buyers" element={<BuyersPage />} />
+            <Route path="/searchresults" element={<SearchResults />} /> 
+          </Routes>
+        </div>
+      </SearchProvider>
     </Router>
   );
 }

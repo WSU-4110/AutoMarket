@@ -1,10 +1,12 @@
-// Import the functions you need from the SDKs you need
-//import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { /*get,*/getDatabase, ref, set } from "firebase/database";
-import { getAuth } from 'firebase/auth'
+import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getAuth } from 'firebase/auth';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
-const firebaseConfig = {
+
+const firebaseConfig = 
+{
   apiKey: "AIzaSyDl5jy0QAcfbGUvp3Xom2lwQSJiZ0ziOrg",
   authDomain: "auto-market-37b17.firebaseapp.com",
   databaseURL: "https://auto-market-37b17-default-rtdb.firebaseio.com",
@@ -21,35 +23,114 @@ const app = initializeApp(firebaseConfig);
 // Initialize Authentication
 export const auth = getAuth(app)
 
-
-//const analytics = getAnalytics(app);
-
 // Initialize Database
 export const db = getDatabase(app);
 
-export function writeUserData(userId, email, password) 
-{ 
-    const userRef = ref(db, 'users/' + userId); 
-    set(userRef, 
-        {
-        email: email,
-        password: password  // Remember to store hashed & salted passwords in a production application!
-    });
+// Initialize Storage
+const storage = getStorage(app);
+
+
+
+export async function uploadImageAndGetURL(file) 
+{
+  const partId = uuidv4();
+  const imageRef = storageRef(storage, `parts/${partId}`);
+  await uploadBytes(imageRef, file);
+  const url = await getDownloadURL(imageRef);
+  return url;
 }
 
-export function writePartData(partId, partName, category, subcategory, fits) 
-{ 
-  const partRef = ref(db, 'parts/' + partId); 
-  set(partRef, {
-      name: partName,
-      category: category,
-      subcategory: subcategory,
-      fits: fits
+export function writeUserData(userId, email, firstName, lastName, phoneNumber, password) 
+{
+  const userRef = ref(db, 'users/' + userId);
+  set(userRef, 
+    {
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    phoneNumber: phoneNumber,
+    password: password
   });
 }
-writePartData("101 ", "break pads", "Breaks", "Brembo", "S1" );
-writePartData("102", "spark plug", "Ignition", "NGK", "S4");
-writePartData("103", "headlight", "Lighting", "Philips", "LX1");
 
-// Example usage
-writeUserData("AliAlsalman", "testing@gmail.com", "testpassword");
+export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName) 
+{
+  const partRef = ref(db, `parts/${partId}`);
+  try {
+    await set(partRef, 
+      {
+      partName,
+      category,
+      subcategory,
+      fits,
+      price,
+      imageUrl,
+      sellerName: sellerName || 'Anonymous'
+    });
+  } catch (error) {
+    console.error("Error writing data to Firebase:", error);
+    throw error;
+  }
+}
+
+export function readPartsData(callback) 
+{
+  const partsRef = ref(db, 'parts/');
+  onValue(partsRef, (snapshot) => 
+  {
+    const data = snapshot.val();
+    if (data) {
+      const partsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+      callback(partsArray);
+    } else 
+    {
+      callback([]); 
+    }
+  }, (error) => 
+  {
+    console.error("Error reading data from Firebase:", error);
+    callback([]);
+  });
+}
+
+export function searchPartsByName(query, callback) 
+{
+  const partsRef = ref(db, 'parts/');
+  onValue(partsRef, (snapshot) => 
+  {
+    const data = snapshot.val();
+    if (data) 
+    {
+      const partsArray = Object.keys(data)
+        .map(key => ({ id: key, ...data[key] }))
+        .filter(part => part.partName.toLowerCase().includes(query.toLowerCase()));
+      callback(partsArray);
+    } 
+    else 
+    {
+      callback([]);
+    }
+  }, (error) => 
+  {
+    console.error("Error searching data in Firebase:", error);
+    callback([]);
+  });
+}
+
+export const updateUserName = async (userId, firstName, lastName) => 
+{
+  const userRef = ref(db, 'users/' + userId);
+  await set(userRef, { firstName, lastName });
+};
+
+export const updateUserEmail = async (newEmail) => 
+{
+  await auth.currentUser.updateEmail(newEmail);
+};
+
+export const updateUserPassword = async (newPassword) => {
+  if (!auth.currentUser) {
+    throw new Error("No authenticated user found");
+  }
+  await auth.currentUser.updatePassword(newPassword);
+};

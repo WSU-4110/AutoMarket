@@ -57,13 +57,16 @@ function App() {
             <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} placeholder="Enter your password" />
           </div>
           <button className="signin-btn" onClick={login}>Login</button>
+          <br></br>
         </div>
 
         <div className="logout-section">
-          <h2>Logout</h2>
+          <h2>Logout</h2>  <br></br>
+
           {currentUser && (
             <span className="user-info">
               Logged in as: {currentUser?.email}
+              <br></br> <br></br>
             </span>
           )}
           <button className="signin-btn" onClick={logout}>Logout</button>

@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from 'react';
+import { readPartsData } from './../../firebase';
+import './BuyersPage.css';
+import Header from './../../Header';
+import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
+
+function MainBuyersPage() {
+  const [parts, setParts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    readPartsData((fetchedParts) => {
+      setParts(fetchedParts);
+      setIsLoading(false);
+    });
+  }, []);
+
+  const handleAddToCart = (partId) => {
+    // Logic to handle adding the part to the cart
+    // This could involve updating a state, or sending data to your backend
+    console.log("Added to cart:", partId);
+  };
+
+  return (
+    <div className="buyers-container">
+      <Header />
+      <h1>Available Parts</h1>
+      {isLoading ? (
+        <p>Loading parts...</p>
+      ) : (
+        <div className="parts-list">
+          {parts.length > 0 ? (
+            parts.map(part => (
+              <div key={part.id} className="part-item">
+                <h2>{part.partName}</h2>
+                <img 
+                  src={part.imageUrl || NoPhotoAvailable}
+                  alt={part.partName} 
+                  className="part-image"
+                />
+                <div className="part-details">
+                  <p>Category: {part.category}</p>
+                  <p>Fits: {part.fits}</p>
+                  <p>Price: ${part.price}</p>
+                  <button onClick={() => handleAddToCart(part.id)} className="add-to-cart-btn">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No parts available at the moment.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default MainBuyersPage;
