@@ -59,6 +59,7 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+
           <button onClick={handleSearch}>Search</button>
         </div>
 
