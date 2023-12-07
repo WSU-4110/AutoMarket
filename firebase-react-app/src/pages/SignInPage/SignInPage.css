@@ -1,30 +1,43 @@
+/* Container for the sign-in section */
 .signin-container {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Enhanced shadow for depth */
+    background-color: #fff; /* Added background color */
 }
-  
+
+/* Form layout within the container */
 .signin-form {
     display: flex;
     flex-direction: column;
 }
-  
+
+/* Input container styling */
 .input-container {
     margin-bottom: 15px;
 }
-  
-/* Updated selector to target both email and password inputs */
+
+/* Styling for email and password inputs */
 input[type="email"], input[type="password"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for a tactile look */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for interaction */
 }
-  
+
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #007bff; /* Highlight focus */
+    outline: none; /* Remove default outline */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 123, 255, 0.5); /* Focus shadow for accessibility */
+}
+
+/* Sign-in button styling */
 .signin-btn {
     padding: 10px 15px;
     background-color: #007bff;
@@ -33,9 +46,18 @@ input[type="email"], input[type="password"] {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
 }
-  
+
 .signin-btn:hover {
     background-color: #0056b3;
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 480px) {
+    .signin-container {
+        margin: 20px auto; /* Reduced margin for smaller screens */
+        padding: 15px; /* Adjusted padding */
+    }
 }
