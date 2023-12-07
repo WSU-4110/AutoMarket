@@ -13,17 +13,19 @@
 
 .MyCart-container {
   background-color: #1d4672;
-  padding: 20px 30px;
+  padding: 10px 50px; /* Increase the top padding to move the text lower */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 206px;
-  margin-bottom: 20px;
+  width: 300px; /* Width for better centering */
+  margin: 1px auto 1px; /* Adjust the margin to move the bottom up */
   text-align: center;
 }
 
 .MyCart-container h1 {
   color: white;
-  text-decoration: underline;
+  border-bottom: 2px solid white; /* Add a solid line as an underline */
+  font-size: 2em; /* Increase the font size */
+  margin-bottom: 10px; /* Add margin to move the text lower */
 }
 
 .product-container {
@@ -31,6 +33,7 @@
 }
 
 .product {
+  position: relative;
   display: flex;
   margin: 10px;
   padding: 10px;
@@ -38,13 +41,41 @@
   border-radius: 8px;
 }
 
+.remove-button-container {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  opacity: 0; /* Initially hide the button */
+  transition: opacity 0.3s ease; /* Add a transition for smooth appearance */
+}
+
+.product:hover .remove-button-container {
+  opacity: 1; /* Show the button on hover */
+}
+
+.remove-button:hover {
+  background-color: #c9302c;
+}
+
+.remove-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 8px; /* Adjust the padding for a smaller button */
+  cursor: pointer;
+}
+
 .product-image {
   margin-right: 10px; /* Add margin to separate image and text */
 }
+
 .product-details {
   flex-grow: 1;
   margin-right: 20px;
+  overflow: hidden;
 }
+
 .product-price {
   font-weight: bold;
 }
@@ -52,6 +83,10 @@
 .order-summary-container h2 {
   color: white;
   text-align: center;
+}
+
+.product-details p {
+  pointer-events: none;
 }
 
 .order-summary-container {
@@ -78,6 +113,7 @@
   width: 100%;
   margin-top: 20px;
 }
+
 .subtotal-box {
   display: flex;
   flex-direction: column; /* Ensure elements are stacked vertically */
@@ -88,18 +124,24 @@
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
 .subtotal-box h2 {
   margin: 0;
 }
+
 .subtotal-total {
   font-size: 1.5em; /* Adjust the font size as needed */
   font-weight: bold;
 }
+
 .small-text {
-  font-size: 12px; /* Adjust the font size for small text */
-  color: #777; /* Adjust the color as needed */
+  font-size: 12px;
+  color: #777;
+  pointer-events: none; /* Disable hover effect on this text */
 }
-.checkout-container {
+
+.checkout-container,
+.checkout-button {
   text-align: center;
   margin-top: 20px;
   padding: 20px;
@@ -107,17 +149,140 @@
   border: 1px solid #ccc;
   background-color: #1d4672;
   color: white;
+  transition: background-color 0.3s ease; /* Add a transition for smooth color change */
 }
 .checkout-button {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 15px 30px; /* Adjusted padding for a centered button */
   border: none;
   border-radius: 8px;
-  background-color: #1d4672;
   color: white;
-  font-size: 16px;
+  font-size: 30px; /* Increased font size */
   cursor: pointer;
+  font-weight: bold;
+  outline: none; /* Remove the outline on focus/hover */
 }
+
+.checkout-container:hover,
 .checkout-button:hover {
   background-color: #154063;
+}
+
+.card-form-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.card-form-container h2 {
+  color: #1d4672;
+  text-align: center;
+  border: 2px solid #1d4672; /* Add a blue border around the heading */
+  padding: 10px; /* Add padding to create space between the text and the border */
+  display: inline-block; /* Center the box horizontally */
+  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+  margin-bottom: 20px; /* Add margin at the bottom for spacing */
+}
+
+.card-form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-input {
+  margin-bottom: 10px;
+}
+
+.card-input label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.card-input input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+.card-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.card-input-group label {
+  width: 100px; /* Set a fixed width for labels */
+  text-align: right; /* Align labels to the right */
+  margin-right: 10px; /* Add some spacing between label and input */
+}
+.submit-button {
+  background-color: #1d4672;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px; /* Adjusted padding for a centered button */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none; /* Remove the outline on focus/hover */
+  transition: background-color 0.3s ease; /* Add a transition for smooth color change */
+
+  /* Center the button within the container */
+  display: block;
+  margin: auto;
+  margin-top: 20px; /* Adjusted margin for spacing */
+}
+
+.submit-button:hover {
+  background-color: #154063;
+}
+.delivery-options-container {
+  flex-grow: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-left: 20px;
+  text-align: center; /* Center the content */
+}
+
+.delivery-options h2 {
+  color: #1d4672;
+  text-align: center; /* Center the heading */
+}
+
+.delivery-input {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delivery-input label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.delivery-input input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.submit-button {
+  background-color: #1d4672;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
