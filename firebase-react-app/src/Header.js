@@ -1,20 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import Headroom from "react-headroom";
 import { Link } from "react-router-dom";
-import { auth } from './firebase';
-import { SearchContext } from './pages/SearchResults/SearchContext';
-import { searchPartsByName } from './firebase'; 
+import { auth } from "./firebase";
+import { SearchContext } from "./pages/SearchResults/SearchContext";
+import { searchPartsByName } from "./firebase";
 import logo from "./images/AutoMarketLogo.png";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from "react-router-dom";
 import "./components/header.css";
-const Header = () => 
-{
+const Header = () => {
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const { setSearchResults } = useContext(SearchContext);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -36,12 +34,10 @@ const Header = () =>
     setShowDropdown(false);
   };
 
-
   const handleSearch = () => {
-    searchPartsByName(searchQuery, (results) => 
-    {
+    searchPartsByName(searchQuery, (results) => {
       setSearchResults(results);
-      navigate('/searchresults'); 
+      navigate("/searchresults");
     });
   };
 
@@ -63,7 +59,9 @@ const Header = () =>
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <div className="enter-button">
+            <button onClick={handleSearch}>Enter</button>
+          </div>
         </div>
 
         <div className="buttons">
@@ -74,7 +72,7 @@ const Header = () =>
                 type="button"
                 onClick={toggleDropdown}
               >
-               {user.displayName || user.email} 
+                {user.displayName || user.email}
               </button>
               {showDropdown && (
                 <div className="dropdown-menu">
@@ -82,18 +80,19 @@ const Header = () =>
                     Profile
                   </Link>
                   <div className="dropdown-divider"></div>
-                  <span
-                    className="dropdown-item signout"
-                    onClick={() => {
-                      auth.signOut();
-                      closeDropdown();
-                    }}
-                  >
-                    Sign Out
-                  </span>
+                  <div>
+                    <span
+                      className="dropdown-item signout"
+                      onClick={() => {
+                        auth.signOut();
+                        closeDropdown();
+                      }}
+                    >
+                      Sign Out
+                    </span>
+                  </div>
                 </div>
               )}
-
             </div>
           ) : (
             <>
