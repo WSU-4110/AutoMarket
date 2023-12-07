@@ -72,3 +72,68 @@
   border: none;
   outline: none;
 }
+
+/* ... your existing styles ... */
+
+.dropdown button {
+  /* ... your existing styles ... */
+  background-color: #3498db; /* Blue color */
+  color: white;
+  position: relative;
+  border: 2px solid #2980b9; /* Darker blue color */
+  border-radius: 8px;
+}
+
+.dropdown button::after {
+  content: "\25BC"; /* Unicode character for a downward arrow */
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.dropdown-menu {
+  /* ... your existing styles ... */
+  top: calc(100% + 5px); /* Adjust the value to bring it closer */
+  opacity: 0;
+  transform: translateX(-5%) translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+  margin-left: 62px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  background-color: #fff; /* White background for the dropdown */
+}
+
+.dropdown-menu a,
+.dropdown-menu .signout {
+  /* ... your existing styles ... */
+  color: #333; /* Dark text color */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu .signout:hover {
+  background-color: #3498db; /* Blue color on hover */
+  color: #fff; /* White text color on hover */
+}
+
+/* Adjust the dropdown menu divider styles */
+.dropdown-divider {
+  margin: 8px 0;
+  height: 1px;
+  background-color: #bdc3c7; /* Lighter gray color for divider */
+}
+
+/* Adjust the dropdown menu signout item styles */
+.dropdown-menu .signout {
+  color: #000000; /* Red color for signout */
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}

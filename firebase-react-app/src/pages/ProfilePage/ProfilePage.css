@@ -61,6 +61,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  display: inline-flex;
 }
 
 .toggle-button button:hover {
