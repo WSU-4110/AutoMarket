@@ -5,30 +5,36 @@ import { writePartData } from './../../firebase';
 import { v4 as uuidv4 } from 'uuid'; 
 
 function SellersPage() {
-  const [partName, setPartName] = useState("");
-  const [category, setCategory] = useState("");
-  const [subcategory, setSubcategory] = useState("");
-  const [fits, setFits] = useState("");
-  const [price, setPrice] = useState("");
+  const [partData, setPartData] = useState({
+    partName: "",
+    category: "",
+    subcategory: "",
+    fits: "",
+    price: ""
+  });
   const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPartData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   const submitForm = async () => {
     try {
+      const { partName, category, subcategory, fits, price } = partData;
       if (!partName || !category || !subcategory || !fits || !price) {
         throw new Error("All fields are required.");
       }
 
       const partId = uuidv4();
-
-      console.log("Submitting:", { partName, category, subcategory, fits, price });
+      console.log("Submitting:", partData);
       await writePartData(partId, partName, category, subcategory, fits, price);
 
       setMessage("Form submitted successfully!");
-      setPartName("");
-      setCategory("");
-      setSubcategory("");
-      setFits("");
-      setPrice("");
+      setPartData({ partName: "", category: "", subcategory: "", fits: "", price: "" });
     } catch (error) {
       console.error(error);
       setMessage(`Submission Error: ${error.message}`);
@@ -37,70 +43,32 @@ function SellersPage() {
 
   return (
     <div> 
-          <Header />
-    <div className="sellers-container">
-      <div className="sellers-form">
-        <h2>Sellers</h2>
+      <Header />
+      <div className="sellers-container">
+        <div className="sellers-form">
+          <h2>Sellers</h2>
 
-        <div className="input-container">
-          <label>Part Name:</label>
-          <input
-            type="text"
-            value={partName}
-            onChange={(e) => setPartName(e.target.value)}
-            placeholder="Enter part name"
-          />
+          {Object.entries(partData).map(([key, value]) => (
+            <div className="input-container" key={key}>
+              <label>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
+              <input
+                type="text"
+                name={key}
+                value={value}
+                onChange={handleChange}
+                placeholder={`Enter ${key}`}
+              />
+            </div>
+          ))}
+
+          <button className="submit-btn" onClick={submitForm}>
+            Submit
+          </button>
         </div>
 
-        <div className="input-container">
-          <label>Category:</label>
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Enter category"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Subcategory:</label>
-          <input
-            type="text"
-            value={subcategory}
-            onChange={(e) => setSubcategory(e.target.value)}
-            placeholder="Enter subcategory"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Fits:</label>
-          <input
-            type="text"
-            value={fits}
-            onChange={(e) => setFits(e.target.value)}
-            placeholder="Enter fits details"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Price:</label>
-          <input
-            type="text"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Enter price"
-          />
-        </div>
-
-        <button className="submit-btn" onClick={submitForm}>
-          Submit
-        </button>
-      </div>
-
-      {message && <div className="message">{message}</div>}
-    </div>    
+        {message && <div className="message">{message}</div>}
+      </div>    
     </div>
-
   );
 }
 
