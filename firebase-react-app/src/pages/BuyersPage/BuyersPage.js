@@ -6,19 +6,29 @@ import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
 
 function MainBuyersPage() {
   const [parts, setParts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    readPartsData((fetchedParts) => {
+    readPartsData(fetchedParts => {
       setParts(fetchedParts);
+      setIsLoading(false);
+    }).catch(err => {
+      setError(err.message);
+      setIsLoading(false);
     });
   }, []);
 
   return (
     <div className="buyers-container">
-            <Header />
+      <Header />
       <h1>Available Parts</h1>
       <div className="parts-list">
-        {parts.length > 0 ? (
+        {isLoading ? (
+          <p>Loading parts...</p>
+        ) : error ? (
+          <p>Error loading parts: {error}</p>
+        ) : parts.length > 0 ? (
           parts.map(part => (
             <div key={part.id} className="part-item">
               <h2>{part.partName}</h2>
