@@ -59,7 +59,9 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <div className="enter-button">
+            <button onClick={handleSearch}>Enter</button>
+          </div>
         </div>
 
         <div className="buttons">

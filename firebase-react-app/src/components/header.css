@@ -60,8 +60,9 @@
   font-weight: 600;
 }
 .search-bar {
+  margin-top: 42px;
   flex-grow: 1;
-  margin: 0 20px;
+  margin-left: 25px;
 }
 
 .search-bar input {
@@ -73,7 +74,9 @@
   outline: none;
 }
 
-/* ... your existing styles ... */
+.dropdown {
+  position: relative; /* Ensure position relative for proper dropdown positioning */
+}
 
 .dropdown button {
   /* ... your existing styles ... */
@@ -96,12 +99,13 @@
   opacity: 0;
   transform: translateX(-5%) translateY(-10px);
   transition: opacity 0.3s, transform 0.3s;
-  margin-left: 62px;
+  margin-left: 73px; /* Remove margin-left */
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   position: absolute;
   background-color: #fff; /* White background for the dropdown */
+  margin-top: 5px;
 }
 
 .dropdown-menu a,
@@ -137,3 +141,45 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.search-bar {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.search-bar input {
+  width: calc(100% - 40px);
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.enter-button {
+  display: flex;
+  align-items: center;
+}
+
+.enter-button button {
+  margin-top: 10px;
+  margin-left: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #3498db; /* Blue color */
+  color: white;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.enter-button button:hover {
+  background-color: #2980b9; /* Darker blue color on hover */
+  transform: scale(
+    1.05
+  ); /* Add a slight scale effect on hover for a fancier look */
+  box-shadow: 0px 0px 10px rgba(52, 152, 219, 0.5); /* Add a subtle box shadow on hover */
+}
+
+/* ... your existing styles ... */
