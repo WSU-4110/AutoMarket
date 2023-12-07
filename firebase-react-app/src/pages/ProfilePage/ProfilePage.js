@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {
-  auth,
-  db,
-  updateUserName,
-  updateUserEmail,
-  updateUserPassword,
-} from "./../../firebase";
+import { auth, 
+          db, 
+          updateUserName, 
+          updateUserPassword } from './../../firebase';
 import { ref, onValue, set } from "firebase/database";
 import Header from "./../../Header";
+import Footer from "./../../Footer";
 import SellersPage from "./../SellersPage/SellersPage";
 import BuyersPage from "./../BuyersPage/BuyersPage";
 import "./ProfilePage.css";
 
-const Profile = () => {
+const Profile = () => 
+{
   const [user, setUser] = useState(auth.currentUser);
   const [userData, setUserData] = useState(null);
 
@@ -23,16 +22,19 @@ const Profile = () => {
 
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
   const [showUpdateDetailsForm, setShowUpdateDetailsForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordUpdateSuccess, setPasswordUpdateSuccess] = useState("");
 
   const [showSellers, setShowSellers] = useState(false);
   const [showBuyers, setShowBuyers] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
+  useEffect(() => 
+  {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => 
+    {
+      if (authUser) 
+      {
         setUser(authUser);
         fetchUserData(authUser.uid);
       }
@@ -42,8 +44,10 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => 
+    {
+      if (authUser) 
+      {
         setUser(authUser);
         fetchUserData(authUser.uid);
       }
@@ -52,9 +56,11 @@ const Profile = () => {
     return () => unsubscribe();
   }, []);
 
-  const fetchUserData = (userId) => {
+  const fetchUserData = (userId) => 
+  {
     const userRef = ref(db, "users/" + userId);
-    onValue(userRef, (snapshot) => {
+    onValue(userRef, (snapshot) => 
+    {
       const data = snapshot.val();
       setUserData(data);
       if (data) {
@@ -64,12 +70,12 @@ const Profile = () => {
 
         setNewFirstName(data.firstName || "");
         setNewLastName(data.lastName || "");
-        setNewEmail(auth.currentUser.email);
       }
     });
   };
 
-  const handleCarDetailsSubmit = async () => {
+  const handleCarDetailsSubmit = async () => 
+  {
     const userRef = ref(db, "users/" + user.uid);
     await set(userRef, {
       ...userData,
@@ -78,31 +84,31 @@ const Profile = () => {
     fetchUserData(user.uid);
   };
 
-  const handleUpdateName = async () => {
+  const handleUpdateName = async () => 
+  {
     await updateUserName(user.uid, newFirstName, newLastName);
     fetchUserData(user.uid);
   };
 
-  const handleUpdateEmail = async () => {
-    await updateUserEmail(newEmail);
-  };
-
-  const handleUpdatePassword = async () => {
+  const handleUpdatePassword = async () => 
+  {
     try {
-      if (newPassword.trim()) {
-        await updateUserPassword(newPassword);
-      } else {
-      }
+      await updateUserPassword(newPassword);
+      setPasswordUpdateSuccess("Password successfully updated.");
+      setNewPassword(""); 
     } catch (error) {
-      console.error("Error updating password:", error);
+      console.error("Error in updating password:", error);
+      setPasswordUpdateSuccess("Password successfully updated.");
     }
   };
 
-  const toggleCarDetailsForm = () => {
+  const toggleCarDetailsForm = () => 
+  {
     setShowCarDetailsForm(!showCarDetailsForm);
   };
 
-  const toggleUpdateDetailsForm = () => {
+  const toggleUpdateDetailsForm = () =>
+  {
     setShowUpdateDetailsForm(!showUpdateDetailsForm);
   };
 
@@ -117,6 +123,13 @@ const Profile = () => {
     return <BuyersPage />;
   }
 
+  const capitalize = (str) => 
+  {
+    if (!str) return "N/A";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+
   return (
     <div className="profile">
       <Header />
@@ -126,13 +139,13 @@ const Profile = () => {
         </h1>
 
         <div className="user-info">
-          <h3>Your Details</h3>
-          <br></br>
-          <p>
-            Name: {userData?.firstName || "N/A"} {userData?.lastName || "N/A"}
-          </p>
-          <p>Email: {user?.email || "N/A"}</p>
-        </div>
+        <h3>Your Details</h3>
+        <br></br>
+        <p>
+          Name: {capitalize(userData?.firstName)} {capitalize(userData?.lastName)}
+        </p>
+        <p>Email: {user?.email || "N/A"}</p>
+      </div>
 
         <div class="toggle-button">
           <button onClick={toggleUpdateDetailsForm}>
@@ -159,22 +172,16 @@ const Profile = () => {
             <button onClick={handleUpdateName}>Update Name</button>
 
             <input
-              type="email"
-              placeholder="New Email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-            <button onClick={handleUpdateEmail}>Update Email</button>
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <button onClick={handleUpdatePassword}>Update Password</button>
 
-            <input
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <button onClick={handleUpdatePassword}>Update Password</button>
-          </div>
-        )}
+          {passwordUpdateSuccess && <p>{passwordUpdateSuccess}</p>}
+        </div>
+      )}
 
         <div class="toggle-button">
           <button onClick={toggleCarDetailsForm}>
@@ -228,6 +235,7 @@ const Profile = () => {
           <button onClick={handleSignOut}>Sign Out</button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

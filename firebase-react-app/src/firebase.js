@@ -56,7 +56,8 @@ export function writeUserData(userId, email, firstName, lastName, phoneNumber, p
 export async function writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName) 
 {
   const partRef = ref(db, `parts/${partId}`);
-  try {
+  try 
+  {
     await set(partRef, 
       {
       partName,
@@ -67,7 +68,8 @@ export async function writePartData(partId, partName, category, subcategory, fit
       imageUrl,
       sellerName: sellerName || 'Anonymous'
     });
-  } catch (error) {
+  } catch (error) 
+  {
     console.error("Error writing data to Firebase:", error);
     throw error;
   }
@@ -123,14 +125,17 @@ export const updateUserName = async (userId, firstName, lastName) =>
   await set(userRef, { firstName, lastName });
 };
 
-export const updateUserEmail = async (newEmail) => 
+export const updateUserPassword = async (newPassword) => 
 {
-  await auth.currentUser.updateEmail(newEmail);
-};
-
-export const updateUserPassword = async (newPassword) => {
-  if (!auth.currentUser) {
-    throw new Error("No authenticated user found");
+  const user = auth.currentUser;
+  if (user) {
+    try {
+      await user.updatePassword(newPassword);
+    } catch (error) {
+      console.error("Error updating password:", error);
+      throw error;
+    }
+  } else {
+    throw new Error("User is not authenticated");
   }
-  await auth.currentUser.updatePassword(newPassword);
 };

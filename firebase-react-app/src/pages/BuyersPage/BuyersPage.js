@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { readPartsData } from './../../firebase';
 import './BuyersPage.css';
 import Header from './../../Header';
+import Footer from "./../../Footer";
 import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
 
 function MainBuyersPage() {
@@ -15,9 +16,8 @@ function MainBuyersPage() {
     });
   }, []);
 
-  const handleAddToCart = (partId) => {
-    // Logic to handle adding the part to the cart
-    // This could involve updating a state, or sending data to your backend
+  const handleAddToCart = (partId) => 
+  {
     console.log("Added to cart:", partId);
   };
 
@@ -53,6 +53,7 @@ function MainBuyersPage() {
           )}
         </div>
       )}
+        <Footer />
     </div>
   );
 }
