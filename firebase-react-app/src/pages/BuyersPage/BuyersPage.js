@@ -4,10 +4,12 @@ import './BuyersPage.css';
 import Header from './../../Header';
 import Footer from "./../../Footer";
 import NoPhotoAvailable from '../../images/NoPhotoAvailable.jpg';
+import { useCart } from '../CartPage/CartContext';
 
 function MainBuyersPage() {
   const [parts, setParts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     readPartsData((fetchedParts) => {
@@ -16,10 +18,11 @@ function MainBuyersPage() {
     });
   }, []);
 
-  const handleAddToCart = (partId) => 
-  {
-    console.log("Added to cart:", partId);
+  const handleAddToCart = (part) => {
+    console.log("Added to cart:", part);
+    addToCart(part);
   };
+  
 
   return (
     <div className="buyers-container">
@@ -42,7 +45,7 @@ function MainBuyersPage() {
                   <p>Category: {part.category}</p>
                   <p>Fits: {part.fits}</p>
                   <p>Price: ${part.price}</p>
-                  <button onClick={() => handleAddToCart(part.id)} className="add-to-cart-btn">
+                  <button onClick={() => handleAddToCart(part)} className="add-to-cart-btn">
                     Add to Cart
                   </button>
                 </div>
