@@ -1,60 +1,87 @@
+/* Container for the shopping cart */
 .shoppingcart-container {
-  float: left;
   background-color: white;
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 800px;
+  margin: 0 auto; /* Center the container */
+  display: block; /* Replace float with block display */
 }
-.MyCart-container{ /*title textbox specs */
+
+/* Container for the cart title */
+.MyCart-container {
   background-color: #1d4672;
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 206px;
+  margin: 0 auto; /* Center the title container */
 }
-.MyCart-container h1 {  /*title specs */
-color:white;
-text-decoration: underline;
-}
-/*Product specifications
-.product-details{
 
+/* Styling for the cart title */
+.MyCart-container h1 {
+  color: white;
+  text-decoration: underline;
+  text-align: center; /* Center align the title */
 }
-*/
 
-.product-image {/*Image Specifications*/
-  font-style: italic;
+/* Styling for product images */
+.product-image {
+  /* Removed font-style: italic; as it's unusual for images */
 }
-.order-summary-container h2 { /*order title specs */
-color: white;
-text-align: center;
+
+/* Container for the order summary */
+.order-summary-container {
+  background-color: #1d4672;
+  padding: 10px 20px; /* Adjusted padding */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  position: absolute; /* Use absolute positioning for better control */
+  right: 30px; /* Position to the right */
+  top: 30px; /* Position from the top */
 }
-.order-summary-container { /*order textbox specs */
-position: relative; /* Use relative positioning */
-float: right;
-background-color: #1d4672;
-padding: 10px 5px;
-border-radius: 8px;
-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-width: 250px;
-left: -46px;
-top: -80px; /* Adjust the negative value to move it up */
+
+/* Styling for the order summary title */
+.order-summary-container h2 {
+  color: white;
+  text-align: center;
 }
-.order-total-container h2{
-color: #1d4672;
-text-align: left;
-font-size: small;
-text-transform: uppercase;
+
+/* Container for the order total */
+.order-total-container {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  position: absolute; /* Use absolute positioning */
+  right: 30px; /* Position to the right */
+  top: 200px; /* Position from the top, adjust as needed */
 }
-.order-total-container{
-position: relative; /* Use relative positioning */
-float: right;
-background-color: white;
-padding: 5px 10px;
-border-radius: 8px;
-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-width: 250px;
-top: -30px; /* Adjust the negative value to move it up */
-right: -205px;
+
+/* Styling for the order total title */
+.order-total-container h2 {
+  color: #1d4672;
+  text-align: left;
+  font-size: small;
+  text-transform: uppercase;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+  .shoppingcart-container,
+  .MyCart-container,
+  .order-summary-container,
+  .order-total-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .order-summary-container,
+  .order-total-container {
+    position: static; /* Adjust for smaller screens */
+  }
 }
