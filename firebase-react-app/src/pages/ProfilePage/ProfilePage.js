@@ -1,33 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { auth, db, updateUserName, updateUserEmail, updateUserPassword } from './../../firebase';
-import { ref, onValue, set } from 'firebase/database';
+import React, { useState, useEffect } from "react";
+import {
+  auth,
+  db,
+  updateUserName,
+  updateUserEmail,
+  updateUserPassword,
+} from "./../../firebase";
+import { ref, onValue, set } from "firebase/database";
 import Header from "./../../Header";
-import SellersPage from './../SellersPage/SellersPage';
-import BuyersPage from './../BuyersPage/BuyersPage';
-import './ProfilePage.css';
+import SellersPage from "./../SellersPage/SellersPage";
+import BuyersPage from "./../BuyersPage/BuyersPage";
+import "./ProfilePage.css";
 
-const Profile = () => 
-{
+const Profile = () => {
   const [user, setUser] = useState(auth.currentUser);
   const [userData, setUserData] = useState(null);
 
-  const [carMake, setCarMake] = useState('');
-  const [carModel, setCarModel] = useState('');
-  const [carYear, setCarYear] = useState('');
+  const [carMake, setCarMake] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carYear, setCarYear] = useState("");
   const [showCarDetailsForm, setShowCarDetailsForm] = useState(false);
 
-  const [newFirstName, setNewFirstName] = useState('');
-  const [newLastName, setNewLastName] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [newFirstName, setNewFirstName] = useState("");
+  const [newLastName, setNewLastName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [showUpdateDetailsForm, setShowUpdateDetailsForm] = useState(false);
 
   const [showSellers, setShowSellers] = useState(false);
   const [showBuyers, setShowBuyers] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => 
-    {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setUser(authUser);
         fetchUserData(authUser.uid);
@@ -37,12 +41,9 @@ const Profile = () =>
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => 
-  {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => 
-    {
-      if (authUser) 
-      {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         setUser(authUser);
         fetchUserData(authUser.uid);
       }
@@ -51,69 +52,61 @@ const Profile = () =>
     return () => unsubscribe();
   }, []);
 
-
-  const fetchUserData = (userId) => 
-  {
-    const userRef = ref(db, 'users/' + userId);
+  const fetchUserData = (userId) => {
+    const userRef = ref(db, "users/" + userId);
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       setUserData(data);
       if (data) {
-        setCarMake(data.car?.make || '');
-        setCarModel(data.car?.model || '');
-        setCarYear(data.car?.year || '');
+        setCarMake(data.car?.make || "");
+        setCarModel(data.car?.model || "");
+        setCarYear(data.car?.year || "");
 
-        setNewFirstName(data.firstName || '');
-        setNewLastName(data.lastName || '');
+        setNewFirstName(data.firstName || "");
+        setNewLastName(data.lastName || "");
         setNewEmail(auth.currentUser.email);
       }
     });
   };
 
-  const handleCarDetailsSubmit = async () => 
-  {
-    const userRef = ref(db, 'users/' + user.uid);
-    await set(userRef, { ...userData, car: { make: carMake, model: carModel, year: carYear } });
+  const handleCarDetailsSubmit = async () => {
+    const userRef = ref(db, "users/" + user.uid);
+    await set(userRef, {
+      ...userData,
+      car: { make: carMake, model: carModel, year: carYear },
+    });
     fetchUserData(user.uid);
   };
 
-  const handleUpdateName = async () => 
-  {
+  const handleUpdateName = async () => {
     await updateUserName(user.uid, newFirstName, newLastName);
     fetchUserData(user.uid);
   };
 
-  const handleUpdateEmail = async () => 
-  {
+  const handleUpdateEmail = async () => {
     await updateUserEmail(newEmail);
   };
 
   const handleUpdatePassword = async () => {
     try {
-      if (newPassword.trim()) 
-      {
+      if (newPassword.trim()) {
         await updateUserPassword(newPassword);
-      } else 
-      {
+      } else {
       }
-    } catch (error) 
-    {
+    } catch (error) {
       console.error("Error updating password:", error);
     }
   };
 
-  const toggleCarDetailsForm = () => 
-  {
+  const toggleCarDetailsForm = () => {
     setShowCarDetailsForm(!showCarDetailsForm);
   };
 
-  const toggleUpdateDetailsForm = () => 
-  {
+  const toggleUpdateDetailsForm = () => {
     setShowUpdateDetailsForm(!showUpdateDetailsForm);
   };
 
-  const handleSignOut = () => 
-  {
+  const handleSignOut = () => {
     auth.signOut();
   };
 
@@ -128,18 +121,26 @@ const Profile = () =>
     <div className="profile">
       <Header />
       <div className="profile-content">
-        <h1>Profile Page</h1>
+        <h1>
+          <b>Profile Page</b>
+        </h1>
 
         <div className="user-info">
           <h3>Your Details</h3>
           <br></br>
-          <p>Name: {userData?.firstName || 'N/A'} {userData?.lastName || 'N/A'}</p>
-          <p>Email: {user?.email || 'N/A'}</p>
+          <p>
+            Name: {userData?.firstName || "N/A"} {userData?.lastName || "N/A"}
+          </p>
+          <p>Email: {user?.email || "N/A"}</p>
         </div>
 
-        <button className="toggle-button" onClick={toggleUpdateDetailsForm}>
-          {showUpdateDetailsForm ? 'Hide User Details' : 'Update User Details'}
-        </button>
+        <div class="toggle-button">
+          <button onClick={toggleUpdateDetailsForm}>
+            {showUpdateDetailsForm
+              ? "Hide User Details"
+              : "Update User Details"}
+          </button>
+        </div>
 
         {showUpdateDetailsForm && (
           <div className="user-details-form">
@@ -175,31 +176,37 @@ const Profile = () =>
           </div>
         )}
 
-        <button className="toggle-button" onClick={toggleCarDetailsForm}>
-          {showCarDetailsForm ? 'Hide Car Details' : 'Add / Update Car Details'}
-        </button>
+        <div class="toggle-button">
+          <button onClick={toggleCarDetailsForm}>
+            {showCarDetailsForm
+              ? "Hide Car Details"
+              : "Add / Update Car Details"}
+          </button>
+        </div>
 
         {showCarDetailsForm && (
           <div className="car-details-form">
-            <input 
-              type="text" 
-              placeholder="Car Make" 
-              value={carMake} 
-              onChange={(e) => setCarMake(e.target.value)} 
+            <input
+              type="text"
+              placeholder="Car Make"
+              value={carMake}
+              onChange={(e) => setCarMake(e.target.value)}
             />
-            <input 
-              type="text" 
-              placeholder="Car Model" 
-              value={carModel} 
-              onChange={(e) => setCarModel(e.target.value)} 
+            <input
+              type="text"
+              placeholder="Car Model"
+              value={carModel}
+              onChange={(e) => setCarModel(e.target.value)}
             />
-            <input 
-              type="text" 
-              placeholder="Car Year" 
-              value={carYear} 
-              onChange={(e) => setCarYear(e.target.value)} 
+            <input
+              type="text"
+              placeholder="Car Year"
+              value={carYear}
+              onChange={(e) => setCarYear(e.target.value)}
             />
-            <button onClick={handleCarDetailsSubmit}>Add Car</button>
+            <button className="car-button" onClick={handleCarDetailsSubmit}>
+              Add Car
+            </button>
           </div>
         )}
 
@@ -214,7 +221,9 @@ const Profile = () =>
         )}
 
         <div className="profile-buttons">
-          <button onClick={() => setShowSellers(true)}>Go to Sellers Page</button>
+          <button onClick={() => setShowSellers(true)}>
+            Go to Sellers Page
+          </button>
           <button onClick={() => setShowBuyers(true)}>Go to Buyers Page</button>
           <button onClick={handleSignOut}>Sign Out</button>
         </div>
