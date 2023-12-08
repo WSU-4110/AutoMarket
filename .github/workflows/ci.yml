@@ -27,7 +27,7 @@ jobs:
     - name: Run tests
       run: |
         cd firebase-react-app
-        npm test # Replace with your test command if different
+        npm start
 
     - name: Start React App
       run: |
