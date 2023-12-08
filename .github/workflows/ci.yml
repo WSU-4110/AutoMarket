@@ -1,0 +1,35 @@
+name: React App CI
+
+on:
+  push:
+    branches: [ QA ]
+  pull_request:
+    branches: [ QA ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: |
+        cd firebase-react-app
+        npm install
+
+    - name: Run tests
+      run: |
+        cd firebase-react-app
+        npm test # Replace with your test command if different
+
+    - name: Start React App
+      run: |
+        cd firebase-react-app
+        npm start
