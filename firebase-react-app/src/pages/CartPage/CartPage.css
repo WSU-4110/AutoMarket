@@ -1,149 +1,37 @@
-.MyCart-container h1 span 
-{
-  font-weight: bold;
+:root {
+  --primary-color: #1d4672;
+  --secondary-color: #154063;
+  --background-color: white;
+  --text-color: #777;
+  --border-color: #ccc;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.shoppingcart-container 
-{
-  background-color: white;
+.container {
+  background-color: var(--background-color);
   padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 800px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   margin: auto; 
 }
 
-.MyCart-container 
-{
-  background-color: #1d4672;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 206px;
-  margin-bottom: 20px;
+.MyCart-container, .order-summary-container, .checkout-container {
+  background-color: var(--primary-color);
+  color: white;
   text-align: center;
 }
 
-.MyCart-container h1 
-{
-  color: white;
+.MyCart-container h1, .order-summary-container h2 {
   text-decoration: underline;
 }
 
-
-.product 
-{
+.product, .subtotal-box {
   display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.product-image 
-{
-  margin-right: 10px;
-}
-.product-details 
-{
-  flex-grow: 1;
-  margin-right: 20px;
-}
-.product-price 
-{
-  font-weight: bold;
-}
-
-.order-summary-container h2 
-{
-  color: white;
-  text-align: center;
-}
-
-.order-summary-container 
-{
-  background-color: #1d4672;
-  padding: 10px 5px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  text-align: center;
-}
-
-.order-total-container h2 
-{
-  color: #1d4672;
-  text-align: left;
-  font-size: small;
-  text-transform: uppercase;
-}
-
-.order-total-container 
-{
-  background-color: white;
-  padding: 5px 10px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin-top: 20px;
-}
-.subtotal-box {
-  display: flex;
-  flex-direction: column; 
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.subtotal-box h2 
-{
-  margin: 0;
-}
-.subtotal-total 
-{
-  font-size: 1.5em; 
-  font-weight: bold;
-}
-.small-text {
-  font-size: 12px; 
-  color: #777; 
-}
-.checkout-container {
-  text-align: center;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #1d4672;
-  color: white;
-}
-.checkout-button 
-{
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background-color: #1d4672;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-.checkout-button:hover 
-{
-  background-color: #154063;
-}
-
-product {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 15px 0; 
-  padding: 20px; 
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9; 
 }
 
 .product-image {
@@ -152,30 +40,48 @@ product {
   height: auto; 
 }
 
-.product-details {
+.product-details, .subtotal-box h2, .product-price, .subtotal-total {
   flex-grow: 1;
-  margin-right: 20px;
 }
 
-.product-details h2 {
-  font-size: 1.2em; 
-  margin-bottom: 5px;
+.product-details h2, .order-total-container h2 {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  text-transform: uppercase;
 }
 
-.product-details p {
-  font-size: 1em; 
+.small-text {
+  font-size: 12px; 
+  color: var(--text-color); 
 }
 
-.remove-button {
-  padding: 5px 10px;
-  background-color: #dc3545;
-  color: white;
+button {
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+.remove-button {
+  background-color: #dc3545;
+}
+
 .remove-button:hover {
   background-color: #bd2130;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container, .product {
+    width: 100%;
+    flex-direction: column;
+  }
 }
