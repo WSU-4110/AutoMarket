@@ -1,10 +1,21 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --border-color: #ccc;
+    --border-radius: 5px;
+    --font-size: 16px;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .sellers-container {
-    max-width: 400px;
+    max-width: 100%;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Max width */
 }
   
 .sellers-form {
@@ -18,28 +29,37 @@
   
 input[type="text"] {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
     width: 100%;
 }
   
 .submit-btn {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
     cursor: pointer;
     transition: background-color 0.3s;
 }
-  
-.submit-btn:hover {
-    background-color: #0056b3;
+
+.submit-btn:hover, .submit-btn:focus {
+    background-color: var(--primary-hover-color);
+    outline: none; /* Removes default focus outline */
 }
 
 .message {
     margin-top: 20px;
-    font-size: 16px;
+    font-size: var(--font-size);
+}
+
+/* Responsive Design Adjustments */
+@media screen and (max-width: 600px) {
+    .sellers-container {
+        width: 100%;
+        padding: 15px;
+    }
 }
