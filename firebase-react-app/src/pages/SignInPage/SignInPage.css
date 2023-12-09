@@ -1,10 +1,21 @@
+:root {
+    --primary-color: #007bff;
+    --hover-color: #0056b3;
+    --border-color: #ccc;
+    --border-radius: 5px;
+    --font-size: 16px;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .signin-container {
-    max-width: 400px;
+    max-width: 100%;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Max width */
 }
   
 .signin-form {
@@ -16,26 +27,34 @@
     margin-bottom: 15px;
 }
   
-/* Updated selector to target both email and password inputs */
 input[type="email"], input[type="password"] {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
     width: 100%;
 }
   
 .signin-btn {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
     cursor: pointer;
     transition: background-color 0.3s;
 }
-  
-.signin-btn:hover {
-    background-color: #0056b3;
+
+.signin-btn:hover, .signin-btn:focus {
+    background-color: var(--hover-color);
+    outline: none; /* Removes default focus outline */
+}
+
+/* Responsive Design Adjustments */
+@media screen and (max-width: 600px) {
+    .signin-container {
+        width: 100%;
+        padding: 15px;
+    }
 }
