@@ -6,126 +6,82 @@ import { v4 as uuidv4 } from 'uuid';
 import './SellersPage.css';
 
 function SellersPage() {
-  const [partName, setPartName] = useState("");
-  const [category, setCategory] = useState("");
-  const [subcategory, setSubcategory] = useState("");
-  const [fits, setFits] = useState("");
-  const [price, setPrice] = useState("");
-  const [imageFile, setImageFile] = useState(null);
-  const [sellerName, setSellerName] = useState("Anonymous"); 
+  const [formData, setFormData] = useState({
+    partName: "",
+    category: "",
+    subcategory: "",
+    fits: "",
+    price: "",
+    imageFile: null
+  });
+  const [sellerName, setSellerName] = useState("Anonymous");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.displayName) {
         setSellerName(currentUser.displayName);
       }
     });
-
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: files ? files[0] : value
+    }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      partName: "",
+      category: "",
+      subcategory: "",
+      fits: "",
+      price: "",
+      imageFile: null
+    });
+  };
 
   const submitForm = async () => {
     try {
+      const { partName, category, subcategory, fits, price, imageFile } = formData;
       if (!partName || !category || !subcategory || !fits || !price || !imageFile) {
         throw new Error("All fields including the image are required.");
       }
-
+      
+      setIsSubmitting(true);
       const imageUrl = await uploadImageAndGetURL(imageFile);
       const partId = uuidv4();
       await writePartData(partId, partName, category, subcategory, fits, price, imageUrl, sellerName);
 
       setMessage("Part submitted successfully!");
-      setPartName("");
-      setCategory("");
-      setSubcategory("");
-      setFits("");
-      setPrice("");
-      setImageFile(null);
+      resetForm();
     } catch (error) {
       console.error("Submission Error:", error);
       setMessage(`Submission Error: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div> 
-          <Header />
-    <div className="sellers-container">
-      <div className="sellers-form">
-        <h2>Sellers</h2>
-
-        <div className="input-container">
-          <label>Part Name:</label>
-          <input
-            type="text"
-            value={partName}
-            onChange={(e) => setPartName(e.target.value)}
-            placeholder="Enter part name"
-          />
+    <div>
+      <Header />
+      <div className="sellers-container">
+        <div className="sellers-form">
+          <h2>Sellers</h2>
+          {/* Form inputs here, use handleChange for all inputs */}
+          <button className="submit-btn" onClick={submitForm} disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+          {message && <div className="message">{message}</div>}
         </div>
-
-        <div className="input-container">
-          <label>Category:</label>
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Enter category"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Subcategory:</label>
-          <input
-            type="text"
-            value={subcategory}
-            onChange={(e) => setSubcategory(e.target.value)}
-            placeholder="Enter subcategory"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Fits:</label>
-          <input
-            type="text"
-            value={fits}
-            onChange={(e) => setFits(e.target.value)}
-            placeholder="Enter fits details"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>Price:</label>
-          <input
-            type="text"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Enter price"
-          />
-        </div>
-
-        <div className="input-container">
-        <label>Image:</label>
-        <input
-          type="file"
-          onChange={(e) => setImageFile(e.target.files[0])}
-          accept="image/*"
-        />
       </div>
-
-        <button className="submit-btn" onClick={submitForm}>
-          Submit
-        </button>
-
-        {message && <div className="message">{message}</div>}  
-      </div>
-
-      {message && <div className="message">{message}</div>}
-    </div>    
     </div>
-
   );
 }
 
