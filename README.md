@@ -106,9 +106,10 @@
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Sprint 1
-- [ ] Sprint 2
-- [ ] Sprint 3
+* [Sprint 1](https://github.com/WSU-4110/AutoMarket/wiki/Sprint-1-Plan)
+* [Sprint 2](https://github.com/WSU-4110/AutoMarket/wiki/Sprint-2-Plan)
+* [Sprint 3](https://github.com/WSU-4110/AutoMarket/wiki/Sprint-3-Plan)
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
